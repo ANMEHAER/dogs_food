@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- The only section requested -->
+  <section class="subscription-section">
+    <div class="subscription-banner">
+      <p class="banner-text">Subscribe & save on every order!</p>
+    </div>
+  </section>
+
+  <!-- NAVBAR  -->
+  <div class="navbar-wrapper">
+    <nav class="navbar">
+      <div class="navbar-logo"><img src="./images/Group 35643.svg" /></div>
+
+      <!-- Desktop Navigation Links -->
+      <ul class="navbar-links-desktop">
+        <li class="dropdown">
+          <a href="#" class="nav-link">HOME</a>
+          <div class="dropdown-content">
+            <a href="#">Featured Products</a>
+            <a href="#">Best Sellers</a>
+          </div>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="nav-link">SHOP</a>
+          <div class="dropdown-content">
+            <a href="#">EVERYDAY DAILY MULTIVITAMIN</a>
+            <a href="#">DOGGIE DENTAL POWDER</a>
+            <a href="#">DAILY DUO BUNDLE</a>
+            <a href="#">NEW YEAR, NEW HEALTH</a>
+          </div>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="nav-link">ABOUT</a>
+          <div class="dropdown-content">
+            <a href="#">Our Story</a>
+            <a href="#">Meet the Team</a>
+          </div>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="nav-link">SCIENCE</a>
+          <div class="dropdown-content">
+            <a href="#">Research Papers</a>
+            <a href="#">Ingredients</a>
+          </div>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="nav-link">FAQ</a>
+          <div class="dropdown-content">
+            <a href="#">General Questions</a>
+            <a href="#">Subscription Info</a>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Desktop Actions -->
+      <div class="navbar-actions-desktop">
+        <button class="take-the-quiz-btn">Take the Quiz</button>
+        <a href="#" class="icon-link"><img src="./images/Nav Link - Transparent Topbar.svg" /></a>
+        <a href="#" class="icon-link cart-link">
+          <img src="./images/Nav Link - Transparent Topbar (1).svg" />
+        </a>
+        <a href="#" class="icon-link"><img src="./images/Nav Link - Transparent Topbar (2).svg" /></a>
+      </div>
+
+      <!-- Mobile Actions -->
+      <div class="navbar-actions-mobile">
+        <a href="#" class="icon-link"><img src="./images/Nav Link - Transparent Topbar.svg"></a>
+        <a href="#" class="icon-link"><img src="./images/Nav Link - Transparent Topbar (1).svg"></a>
+        <a href="#" class="icon-link cart-link">
+          <img src="images/Nav Link - Transparent Topbar (2).svg">
+        </a>
+        <div class="hamburger-icon" onclick="toggleMobileMenu()">&#9776;</div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobileMenuOverlay" class="mobile-menu-overlay" onclick="toggleMobileMenu()">
+    <div id="mobileMenu" class="mobile-menu" onclick="event.stopPropagation()">
+      <div class="menu-header">
+        <div class="navbar-logo"><img src="./images/Group 35643.svg"></div>
+        <div class="menu-close-btn" onclick="toggleMobileMenu()">
+          <img src="./images/Vector (9).png">
+        </div>
+      </div>
+
+      <ul class="mobile-menu-links">
+        <!-- HOME Mobile Dropdown -->
+        <li class="mobile-dropdown-parent">
+          <a href="#" class="menu-link" onclick="toggleSubMenu(event)">
+            QUICK SNIFFS
+            <span class="dropdown-toggle">+</span>
+          </a>
+          <div class="sub-menu-content">
+            <a href="#">Featured Products</a>
+            <a href="#">Best Sellers</a>
+          </div>
+        </li>
+
+        <!-- SHOP NOW Mobile Dropdown -->
+        <li class="mobile-dropdown-parent">
+          <a href="#" class="menu-link" onclick="toggleSubMenu(event)">
+            SHOP NOW
+            <span class="dropdown-toggle">+</span>
+          </a>
+          <div class="sub-menu-content shop-now-special">
+            <div class="shop-card">
+              <img src="./images/4d6acec2c9ff3ea9c8f20f69a4050c62ca05ef15 (1).png" alt="Everyday Daily Multivitamin" />
+              <p>Everyday Daily Multivitamin</p>
+            </div>
+
+            <div class="shop-card">
+              <img src="./images/4d6acec2c9ff3ea9c8f20f69a4050c62ca05ef15 (2).png" alt="Doggie Dental Powder" />
+              <p>Doggie Dental Powder</p>
+            </div>
+          </div>
+        </li>
+
+        <!-- ABOUT Mobile Dropdown -->
+        <li class="mobile-dropdown-parent">
+          <a href="#" class="menu-link" onclick="toggleSubMenu(event)">
+            SCIENCE
+            <span class="dropdown-toggle">+</span>
+          </a>
+          <div class="sub-menu-content">
+            <a href="#">Our Story</a>
+            <a href="#">Meet the Team</a>
+          </div>
+        </li>
+
+        <!-- SCIENCE Mobile Dropdown -->
+        <li class="mobile-dropdown-parent">
+          <a href="#" class="menu-link" onclick="toggleSubMenu(event)">
+            FAQ
+            <span class="dropdown-toggle">+</span>
+          </a>
+          <div class="sub-menu-content">
+            <a href="#">Research Papers</a>
+            <a href="#">Ingredients</a>
+          </div>
+        </li>
+
+        <!-- FAQ Mobile Dropdown -->
+        <li class="mobile-dropdown-parent">
+          <a href="#" class="menu-link" onclick="toggleSubMenu(event)">
+            ABOUT US
+            <span class="dropdown-toggle">+</span>
+          </a>
+          <div class="sub-menu-content">
+            <a href="#">General Questions</a>
+            <a href="#">Subscription Info</a>
+          </div>
+        </li>
+
+        <!-- ACCOUNT is a simple link -->
+        <li class="mobile-dropdown-parent">
+          <a href="#" class="menu-link" onclick="toggleSubMenu(event)">
+            INGREDIENT GLOSSARY
+            <span class="dropdown-toggle">+</span>
+          </a>
+          <div class="sub-menu-content">
+            <a href="#">General Questions</a>
+            <a href="#">Subscription Info</a>
+          </div>
+        </li>
+
+        <li class="mobile-dropdown-parent">
+          <a href="#" class="menu-link" onclick="toggleSubMenu(event)">
+            INGREDIENT INTEGRITY
+            <span class="dropdown-toggle">+</span>
+          </a>
+          <div class="sub-menu-content">
+            <a href="#">General Questions</a>
+            <a href="#">Subscription Info</a>
+          </div>
+        </li>
+
+        <li class="mobile-dropdown-parent">
+          <a href="#" class="menu-link" onclick="toggleSubMenu(event)">
+            BLOG
+            <span class="dropdown-toggle">+</span>
+          </a>
+          <div class="sub-menu-content">
+            <a href="#">General Questions</a>
+            <a href="#">Subscription Info</a>
+          </div>
+        </li>
+
+        <li class="mobile-dropdown-parent">
+          <a href="#" class="menu-link" onclick="toggleSubMenu(event)">
+            CLINICAL STUDIES
+            <span class="dropdown-toggle">+</span>
+          </a>
+          <div class="sub-menu-content">
+            <a href="#">General Questions</a>
+            <a href="#">Subscription Info</a>
+          </div>
+        </li>
+
+        <li class="mobile-dropdown-parent">
+          <a href="#" class="menu-link" onclick="toggleSubMenu(event)">
+            MY ACCOUNT
+            <span class="dropdown-toggle">+</span>
+          </a>
+          <div class="sub-menu-content">
+            <a href="#">General Questions</a>
+            <a href="#">Subscription Info</a>
+          </div>
+        </li>
+      </ul>
+
+      <div class="mobile-quiz-btn">
+        <button class="take-the-quiz-btn">Take the Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- hero-section  -->
+  <section class="hero-section">
+    <div class="content-container">
+      <h1 class="hero-title">BETTER HEALTH, ONE SCOOP AT A TIME.</h1>
+      <p class="hero-subtitle">
+        Fix Every Pup Problem with the Daily Duo, Perfectly Matched to Their
+        Breed, Age, and Tail-Wagging Needs!
+      </p>
+      <div class="button-group">
+        <a href="#" class="btn btn-light">LEARN MORE</a>
+        <a href="#" class="btn btn-dark">SHOP NOW</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Press Section -->
+  <section class="press-section">
+    <div class="press-slider">
+      <div class="press-track" id="pressTrack">
+        <!-- 9 unique items -->
+        <div class="press-item">
+          <p>Clean, science-backed</p>
+          <img src="./images/moderndog.png" />
+        </div>
+        <div class="press-item">
+          <p>Designed to combat the root causes of bad breath</p>
+          <img src="./images/petfoodindustry.png" />
+        </div>
+        <div class="press-item">
+          <p>A comprehensive oral health solution</p>
+          <img src="./images/axios.png" />
+        </div>
+        <div class="press-item">
+          <p>A science-first pet wellness brand</p>
+          <img src="./images/petsplus.png" />
+        </div>
+        <div class="press-item">
+          <p>Built for today’s pet parents</p>
+          <img src="./images/PULSE 2.png" />
+        </div>
+        <div class="press-item">
+          <p>Industry recognition</p>
+          <img src="./images/petage.png" />
+        </div>
+        <div class="press-item">
+          <p>Digestion, Immunity, Skin & Aging</p>
+          <img src="./images/fortune.png" />
+        </div>
+        <div class="press-item">
+          <p>Powerful blend of ingredients</p>
+          <img src="./images/pix.png" />
+        </div>
+        <div class="press-item">
+          <p>Trusted wellness partner</p>
+          <img src="./images/petfood.png" />
+        </div>
+
+        <!-- Duplicate 9 items for infinite loop -->
+        <div class="press-item">
+          <p>Clean, science-backed</p>
+          <img src="https://placehold.co/120x30/ffffff/000000?text=ModernDog" />
+        </div>
+        <div class="press-item">
+          <p>Designed to combat the root causes of bad breath</p>
+          <img src="https://placehold.co/120x30/ffffff/000000?text=PETFOOD+INDUSTRY" />
+        </div>
+        <div class="press-item">
+          <p>A comprehensive oral health solution</p>
+          <img src="https://placehold.co/120x30/ffffff/000000?text=PETS+" />
+        </div>
+        <div class="press-item">
+          <p>A science-first pet wellness brand</p>
+          <img src="https://placehold.co/120x30/ffffff/000000?text=PULSE+2" />
+        </div>
+        <div class="press-item">
+          <p>Built for today’s pet parents</p>
+          <img src="https://placehold.co/120x30/ffffff/000000?text=Pet+Age" />
+        </div>
+        <div class="press-item">
+          <p>Industry recognition</p>
+          <img src="https://placehold.co/120x30/ffffff/000000?text=FORTUNE" />
+        </div>
+        <div class="press-item">
+          <p>Digestion, Immunity, Skin & Aging</p>
+          <img src="https://placehold.co/120x30/ffffff/000000?text=PIX11" />
+        </div>
+        <div class="press-item">
+          <p>Powerful blend of ingredients</p>
+          <img src="https://placehold.co/120x30/ffffff/000000?text=PETfood" />
+        </div>
+        <div class="press-item">
+          <p>Trusted wellness partner</p>
+          <img src="https://placehold.co/120x30/ffffff/000000?text=AXIOS" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- health-section-html  -->
+  <section class="betterhealth-section">
+    <div class="betterhealth-container">
+      <div class="betterhealth-wrapper">
+        <!-- Left Content -->
+        <div class="betterhealth-left">
+          <div class="betterhealth-heading">
+            <h1>Their Health Glows. Your Life Flows with Other Half!</h1>
+          </div>
+          <div class="betterhealth-text">
+            <p>
+              Ditch the junk—Other Half crafts science-backed, human-grade
+              supplements that pamper your pup with pure wellness. Think
+              pumpkin-bacon yum, minus the fillers. Just pure, proven goodness
+              for tail-wagging bliss!
+            </p>
+          </div>
+          <div class="betterhealth-btnbox">
+            <button class="betterhealth-btn">SHOP NOW</button>
+          </div>
+        </div>
+
+        <!-- Right Image -->
+        <div class="betterhealth-image">
+          <img src="./images/manwithdog.png"
+            alt="A person joyfully holding a French Bulldog up, both outdoors under a blue sky."
+            onerror="this.onerror=null; this.src='https://placehold.co/656x700/F0F0F0/888?text=Image+Placeholder'" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- duo-section-container  -->
+  <div class="duo-sec-container">
+    <div class="duo-sec-wrapper">
+      <div class="duo-sec-image-box">
+        <img src="./images/Untitled-1 1.png" alt="The Starter Duo Product Image" class="duo-sec-image" />
+      </div>
+
+      <div class="duo-sec-content">
+        <!-- Top -->
+        <div class="duo-sec-top">
+          <h1>THE STARTER DUO</h1>
+          <div class="duo-sec-rating">
+            best
+            <span class="duo-sec-stars"><img src="./images/Frame 2085661204.svg" /></span>
+            <span class="duo-sec-reviews">10,000+ Reviews</span>
+          </div>
+        </div>
+
+        <!-- Middle -->
+        <div class="duo-sec-middle">
+          <p>The Multitaskers Your Dog Didn’t Know They Needed</p>
+          <p>One scoop for gut, joint, and immune support. The other for dental domination.</p>
+          <p><strong>Together? They’re basically superhero sidekicks.</strong></p>
+        </div>
+
+        <!-- Bottom -->
+        <div class="duo-sec-bottom">
+          <ul>
+            <li><img src="./images/tick.svg" /> <strong>Immunity, digestion, joints?</strong> Handled.</li>
+            <li><img src="./images/tick.svg" /> <strong>Fresh breath and clean chompers?</strong> Nailed it!.</li>
+            <li><img src="./images/tick.svg" /> <strong>Daily Duo?</strong> Doubled up on wellness.</li>
+          </ul>
+          <p>Why settle for one when you can double the good stuff?</p>
+          <button class="duo-sec-btn">SHOP DAILY DUO NOW</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Auto-Slide Section -->
+  <section class="features-slider">
+    <div class="slider-track">
+      <div class="feature-item">
+        <img src="./images/Group 25198.svg" alt="punch" /> NON GMO
+      </div>
+      <div class="feature-item">
+        <img src="./images/Group 25198.svg" alt="punch" /> HUMAN GRADE INGREDIENTS
+      </div>
+      <div class="feature-item">
+        <img src="./images/Group 25198.svg" alt="punch" /> CLINICALLY TESTED
+      </div>
+      <div class="feature-item">
+        <img src="./images/Group 25198.svg" alt="punch" /> NO ARTIFICIAL FLAVORS
+      </div>
+      <div class="feature-item">
+        <img src="./images/Group 25198.svg" alt="punch" /> VETERINARIAN
+        RECOMMENDED
+      </div>
+      <div class="feature-item">
+        <img src="./images/Group 25198.svg" alt="punch" /> MANUFACTURED IN THE USA
+      </div>
+
+      <!-- Duplicate items for infinite loop -->
+      <div class="feature-item">
+        <img src="./images/Group 25198.svg" alt="punch" /> NON GMO
+      </div>
+      <div class="feature-item">
+        <img src="./images/Group 25198.svg" alt="punch" /> HUMAN GRADE INGREDIENTS
+      </div>
+      <div class="feature-item">
+        <img src="./images/Group 25198.svg" alt="punch" /> CLINICALLY TESTED
+      </div>
+      <div class="feature-item">
+        <img src="./images/Group 25198.svg" alt="punch" /> NO ARTIFICIAL FLAVORS
+      </div>
+      <div class="feature-item">
+        <img src="./images/Group 25198.svg" alt="punch" /> VETERINARIAN
+        RECOMMENDED
+      </div>
+      <div class="feature-item">
+        <img src="./images/Group 25198.svg" alt="punch" /> MANUFACTURED IN THE USA
+      </div>
+    </div>
+  </section>
+ 
+
+  <!-- scoop-card-html  -->
+  <div class="scoop-section">
+    <div class="scoop-container">
+      <!-- Text Section -->
+      <div class="scoop-text">
+        <h1>Scoops. Snouts. Chaos</h1>
+        <p>Support built for whatever your dog throws (or chews):</p>
+      </div>
+
+      <!-- Image Section -->
+      <div class="scoop-gallery">
+        <div class="scoop-card">
+          <div class="scoop-image">
+            <img src="./images/1.png" alt="Hip & Joint Support">
+            <h3>Hip & Joint Support</h3>
+            <button class="scoop-toggle">+</button>
+          </div>
+          <div class="scoop-dropdown">Keep those zoomies pain-free—joints that jump for joy!</div>
+        </div>
+
+        <div class="scoop-card">
+          <div class="scoop-image">
+            <img src="./images/2 (1).png" alt="Digestive Health">
+            <h3>Digestive Health</h3>
+            <button class="scoop-toggle">+</button>
+          </div>
+          <div class="scoop-dropdown">Happy tummies mean happy tails!</div>
+        </div>
+
+        <div class="scoop-card">
+          <div class="scoop-image">
+            <img src="./images/3.png" alt="Allergy Support">
+            <h3>Allergy Support</h3>
+            <button class="scoop-toggle">+</button>
+          </div>
+          <div class="scoop-dropdown">Soothe itchy skin and keep your pup comfy!</div>
+        </div>
+
+        <div class="scoop-card">
+          <div class="scoop-image">
+            <img src="./images/4.png" alt="Healthy Aging">
+            <h3>Healthy Aging</h3>
+            <button class="scoop-toggle">+</button>
+          </div>
+          <div class="scoop-dropdown">Support for graceful graying and wagging tails.</div>
+        </div>
+
+        <div class="scoop-card">
+          <div class="scoop-image">
+            <img src="./images/5.png" alt="Immunity Boost">
+            <h3>Immunity Boost</h3>
+            <button class="scoop-toggle">+</button>
+          </div>
+          <div class="scoop-dropdown">Strength from within for unstoppable pups!</div>
+        </div>
+
+        <div class="scoop-card">
+          <div class="scoop-image">
+            <img src="./images/6.png" alt="Dental Delight">
+            <h3>Dental Delight</h3>
+            <button class="scoop-toggle">+</button>
+          </div>
+          <div class="scoop-dropdown">Bright smiles and fresh breath every day.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- feature-section -->
+  <section class="feature-section">
+    <div class="max-width-container">
+      <div class="features-wrapper">
+        <!-- Feature Card 1: Vet-Approved -->
+        <div class="feature-card">
+          <div class="icon-circle">
+            <!-- Placeholder for your Figma Image -->
+            <img class="icon-image" src="./images/Group 132507.svg" alt="Vet-Approved Icon" />
+            <!-- !!! IMPORTANT: Replace the 'src' above with your Figma image URL !!! -->
+          </div>
+          <h3 class="card-title">Vet-Approved</h3>
+          <p class="card-text">
+            Formulated by professionals who speak fluent "woof."
+          </p>
+        </div>
+
+        <!-- Feature Card 2: Clinically Tested -->
+        <div class="feature-card">
+          <div class="icon-circle">
+            <!-- Placeholder for your Figma Image -->
+            <img class="icon-image" src="./images/test 1.svg" alt="Clinically Tested Icon" />
+            <!-- !!! IMPORTANT: Replace the 'src' above with your Figma image URL !!! -->
+          </div>
+          <h3 class="card-title">Clinically Tested</h3>
+          <p class="card-text">
+            Real science. Real studies. Real tail-wagging results.
+          </p>
+        </div>
+
+        <!-- Feature Card 3: Human-Grade Ingredients -->
+        <div class="feature-card">
+          <div class="icon-circle">
+            <!-- Placeholder for your Figma Image -->
+            <img class="icon-image" src="./images/natural-ingredients 1.svg" alt="Human-Grade Ingredients Icon" />
+            <!-- !!! IMPORTANT: Replace the 'src' above with your Figma image URL !!! -->
+          </div>
+          <h3 class="card-title">Human-Grade Ingredients</h3>
+          <p class="card-text">
+            Clean, simple, and effective—nothing you wouldn't want in your own
+            food.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- video-section-html  -->
+  <div class="max-width-container">
+    <!-- 1. Heading Content -->
+    <div class="section-heading">TRUSTED BY VETS. LOVED BY PETS.</div>
+
+    <!-- 2. Video Carousel -->
+    <div class="video-carousel-container">
+      <div id="video-carousel-track" class="video-carousel-track">
+        <!-- Video Cards will be inserted here by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Subscribe-section-html  -->
+  <section class="subscribe-save-wrapper">
+  <div class="subscribe-save-content">
+    <div class="subscribe-save-heading">
+      <h2>SUBSCRIBE & SAVE</h2>
+    </div>
+
+    <div class="subscribe-save-features">
+      <div class="subscribe-save-card">
+        <div class="subscribe-save-icon">
+          <img src="./images/cards-with-dollar-sign 1.svg" alt="Save Icon" />
+        </div>
+        <h3>Save up to 18%</h3>
+        <p>
+          Tail-wagging wellness on autopilot — and more cash in your pocket.
+        </p>
+      </div>
+
+      <div class="subscribe-save-card">
+        <div class="subscribe-save-icon">
+          <img src="./images/Vector (23).svg" alt="Free Shipping Icon" />
+        </div>
+        <h3>Free Shipping</h3>
+        <p>
+          No fetching required. We bring the good stuff straight to your door.
+        </p>
+      </div>
+
+      <div class="subscribe-save-card">
+        <div class="subscribe-save-icon">
+          <img src="./images/gift (1) 1.svg" alt="Surprise Gift Icon" />
+        </div>
+        <h3>Surprise Gifts</h3>
+        <p>Bonus treats? Toys? Only the good kind of surprises.</p>
+      </div>
+    </div>
+
+    <div class="subscribe-save-button">
+      <a href="#" class="subscribe-save-pill">SUBSCRIBE & SAVE</a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- certification-section-html  -->
+  <section class="info-section">
+    <div class="container">
+      <div class="info-item">
+        <div class="icon-placeholder">
+          <img src="./images/quality_icon_2 1.png" alt="Icon 1" />
+        </div>
+        <p>Batch-Tested</p>
+      </div>
+      <div class="info-item">
+        <div class="icon-placeholder">
+          <img src="./images/quality_icon_2 1.png" alt="Icon 2" />
+        </div>
+        <p>No Artificial Colors or Flavors</p>
+      </div>
+      <div class="info-item">
+        <div class="icon-placeholder">
+          <img src="./images/quality_icon_5 1.png" alt="Icon 3" />
+        </div>
+        <p>GMO, Hormone & Antibiotic free</p>
+      </div>
+      <div class="info-item">
+        <div class="icon-placeholder">
+          <img src="./images/quality_icon_5 1 (1).png" alt="Icon 4" />
+        </div>
+        <p>GMP/SQF Certified</p>
+      </div>
+      <div class="info-item">
+        <div class="icon-placeholder">
+          <img src="./images/quality_icon_2 1.png" alt="Icon 5" />
+        </div>
+        <p>Made In USA</p>
+      </div>
+      <div class="info-item">
+        <div class="icon-placeholder">
+          <img src="./images/quality_icon_6 1.png" alt="Icon 6" />
+        </div>
+        <p>In Line With FDA guidelines</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- faq-section-html  -->
+  <section class="faq-section">
+    <h2 class="faq-heading">BARKED QUESTIONS ANSWERED</h2>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        What is Everyday™?
+        <span>+</span>
+      </div>
+      <div class="accordion-content">
+        Everyday™ is a daily supplement formulated for your dog’s overall
+        health and well-being.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        How do I know if my dog needs Everyday™?
+        <span>+</span>
+      </div>
+      <div class="accordion-content">
+        For wet foods, scoop the suggested serving amount and mix
+        thoroughly. For dry foods, gently stir into your dog’s kibble.
+        Consistency is key for best results.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        At what age can my dog start using Everyday™?
+        <span>+</span>
+      </div>
+      <div class="accordion-content">
+        Everyday™ is safe for dogs 6 months and older. Always consult your
+        vet before starting supplements for younger pups.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        What does "100% Human-Grade" mean?
+        <span>+</span>
+      </div>
+      <div class="accordion-content">
+        It means all ingredients are the same quality as those used in
+        food for humans, ensuring safety and high standards.
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <div class="accordion-header">
+        How many scoops are in each tube?
+        <span>+</span>
+      </div>
+      <div class="accordion-content">
+        Each tube contains approximately 30 scoops, enough for a full
+        month’s supply for most dogs.
+      </div>
+    </div>
+  </section>
+
+  <!-- review-section-html  -->
+  <section class="reviews-section">
+    <div class="review-container">
+      <h2 class="reviews-heading">
+        LOVED BY PET PARENTS, <br />
+        TRUSTED BY OVER 4 MILLION FURRY TAILS
+      </h2>
+
+      <div class="reviews-wrapper">
+        <!-- Card 1 -->
+        <div class="review-card">
+          <div class="stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+          </div>
+          <div class="review-title">My dog is like a puppy again!</div>
+          <div class="review-text">
+            After just a few weeks of using Everyday One, my 8-year-old
+            labrador is running around like he’s 2 again! His coat is
+            shinier, and he seems happier overall.
+          </div>
+          <div class="review-author">- Laura, Max’s Owner</div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="review-card">
+          <div class="stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+          </div>
+          <div class="review-title">So much more energy!</div>
+          <div class="review-text">
+            My pup used to nap all day, but now she has the energy to play
+            fetch and run around. Love this product!
+          </div>
+          <div class="review-author">- David, Bella’s Owner</div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="review-card">
+          <div class="stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+          </div>
+          <div class="review-title">Amazing transformation!</div>
+          <div class="review-text">
+            Everyday One really made a difference in my dog’s mood and
+            health. Highly recommended to all pet parents.
+          </div>
+          <div class="review-author">- Sarah, Rocky’s Owner</div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="review-card">
+          <div class="stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+          </div>
+          <div class="review-title">Happier & healthier</div>
+          <div class="review-text">
+            My dog loves it and I can see visible changes in her energy
+            levels. She’s definitely happier and healthier!
+          </div>
+          <div class="review-author">- Mike, Daisy’s Owner</div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="review-card">
+          <div class="stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+          </div>
+          <div class="review-title">Shiny coat & more active</div>
+          <div class="review-text">
+            Ever since I started giving this, his coat looks amazing and
+            he’s more active. Couldn’t be happier!
+          </div>
+          <div class="review-author">- Emma, Charlie’s Owner</div>
+        </div>
+
+        <!-- Duplicate Cards for Smooth Infinite Scroll -->
+        <div class="review-card">
+          <div class="stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+          </div>
+          <div class="review-title">My dog is like a puppy again!</div>
+          <div class="review-text">
+            After just a few weeks of using Everyday One, my 8-year-old
+            labrador is running around like he’s 2 again! His coat is
+            shinier, and he seems happier overall.
+          </div>
+          <div class="review-author">- Laura, Max’s Owner</div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+          </div>
+          <div class="review-title">So much more energy!</div>
+          <div class="review-text">
+            My pup used to nap all day, but now she has the energy to play
+            fetch and run around. Love this product!
+          </div>
+          <div class="review-author">- David, Bella’s Owner</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer-section-html  -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Left Logo -->
+      <div class="footer-logo">
+        <img src="./images/Screenshot_2024-10-24_154626 2.svg" alt="Logo" />
+      </div>
+
+      <div id="mobile-view">
+        <div class="social-icons">
+          <a href="#"><img src="./images/Facebook.svg" alt="Facebook" /></a>
+          <a href="#"><img src="./images/Twitter.svg" alt="Twitter" /></a>
+          <a href="#"><img src="./images/Instagram.svg" alt="Instagram" /></a>
+          <a href="#"><img src="./images/LinkedIn.svg" alt="LinkedIn" /></a>
+        </div>
+      </div>
+
+      <!-- Quick Sniffs -->
+      <div class="footer-links">
+        <h4>Quick Sniffs</h4>
+        <div class="quick-sniffs-columns">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Shop All</a></li>
+            <li><a href="#">Take the Quiz</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Science</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">Ingredient Glossary</a></li>
+            <li><a href="#">Ingredient Integrity</a></li>
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Clinical Studies</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Customer Care -->
+      <div class="footer-links">
+        <h4>Customer Care</h4>
+        <ul>
+          <li><a href="#">Terms & Conditions</a></li>
+          <li><a href="#">Manage Subscription</a></li>
+          <li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Subscription Policy</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Join the Pack -->
+      <div class="footer-join">
+        <h4>Join the Pack</h4>
+        <div class="subscribe-box">
+          <input type="email" placeholder="Email address" />
+          <button>➔</button>
+        </div>
+        <p>
+          Sign up for exclusive deals, new drops, and the occasional meme.
+          No spam. Just tail-wag-worthy content.
+        </p>
+      </div>
+    </div>
+
+    <!-- Social Media + Copy -->
+    <div class="footer-bottom" >
+      <p>© 2025 Other Half. All rights reserved.</p>
+      <div class="social-icons" id="desktop-view">
+         <a href="#"><img src="./images/Facebook.svg" alt="Facebook" /></a>
+          <a href="#"><img src="./images/Twitter.svg" alt="Twitter" /></a>
+          <a href="#"><img src="./images/Instagram.svg" alt="Instagram" /></a>
+          <a href="#"><img src="./images/LinkedIn.svg" alt="LinkedIn" /></a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const buttons = document.querySelectorAll('.scoop-toggle');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const dropdown = btn.closest('.scoop-card').querySelector('.scoop-dropdown');
+        const isActive = btn.classList.contains('active');
+
+        // Close all others
+        document.querySelectorAll('.scoop-toggle').forEach(b => {
+          b.classList.remove('active');
+          b.textContent = '+';
+        });
+        document.querySelectorAll('.scoop-dropdown').forEach(d => {
+          d.classList.remove('show');
+        });
+
+        // Toggle current
+        if (!isActive) {
+          btn.classList.add('active');
+          btn.textContent = '×';
+          dropdown.classList.add('show');
+        }
+      });
+    });
+  </script>
+  
+</body>
+
+</html>
