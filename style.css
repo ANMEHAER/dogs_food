@@ -129,6 +129,7 @@ body {
   /* border: 1px solid black; */
 }
 
+
 @media (max-width: 545px) {
   /* --- List Item (LI) --- */
   .navbar-links-desktop li {
@@ -556,6 +557,30 @@ body {
     padding: 8px 16px; /* make button a bit narrower */
     margin-right: 10px;
   }
+}
+/* Fix: prevent dropdown from vanishing when moving mouse down */
+.navbar-links-desktop .dropdown {
+  position: relative;
+}
+
+/* Create invisible hover bridge so user can move from parent to dropdown smoothly */
+.navbar-links-desktop .dropdown::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 30px; /* gap coverage area */
+  background: transparent;
+  z-index: 5;
+}
+
+/* Keep dropdown visible when hovering either parent or dropdown */
+.navbar-links-desktop .dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 
