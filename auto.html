@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trusted by Pets Carousel</title>
+    <!-- Include a clean, modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styling */
+        :root {
+            --primary-color: #000;
+            --secondary-color: #1a4f32; /* Deep Green for controls */
+            --light-bg: #f9f9f5;
+            --card-bg: #fff;
+            --max-width: 1920px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
+            color: var(--primary-color);
+            line-height: 1.6;
+        }
+
+        /* Main Container - max-width 1920px */
+        #pageContainer { /* Added ID for event delegation */
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            box-sizing: border-box;
+            overflow: hidden; 
+        }
+
+        /* Heading Section */
+        .heading-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .heading-section h2 {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+            margin: 0;
+        }
+
+        /* Carousel Styling */
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding: 0 0.5rem; 
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+            cursor: grab; /* Indicate draggable area */
+        }
+        
+        .carousel-track.dragging {
+            cursor: grabbing;
+        }
+
+        .carousel-item {
+            /* On mobile, show one item fully */
+            min-width: 90%; 
+            margin: 0 0.5rem;
+            flex-shrink: 0;
+            padding-bottom: 2rem;
+            /* Prevents image dragging ghosting on some browsers */
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* Tablet and Desktop Styles */
+        @media (min-width: 640px) {
+            .carousel-item {
+                /* On tablet/small desktop, show 2.5 items */
+                min-width: calc(100% / 2.5 - 1rem); 
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .carousel-item {
+                /* On large screens, show 3.5 items */
+                min-width: calc(100% / 3.5 - 1rem); 
+            }
+        }
+
+
+        /* Video Card Styling */
+        .video-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .video-container {
+            position: relative;
+            padding-top: 133%; /* Aspect ratio for portrait video/image */
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .video-element {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover .video-element {
+            transform: scale(1.05);
+        }
+
+        /* Play/Icon Overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        .video-card[data-playing="true"] .overlay {
+            opacity: 0; /* Hide overlay when playing */
+            pointer-events: none;
+        }
+        
+        /* Large center play button */
+        .play-button-center {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .play-button-center svg {
+            width: 50px;
+            height: 50px;
+            fill: #fff;
+            filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Bottom Controls */
+        .controls {
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--light-bg);
+        }
+
+        .control-btn {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .control-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--secondary-color);
+        }
+        
+        /* Visually appealing active states for controls */
+        .control-btn.active svg {
+            fill: #7d7d7d; /* Lighter color when paused or muted */
+        }
+        
+        .control-btn:hover {
+            opacity: 0.7;
+        }
+
+        /* Simulating the green product cup in the image */
+        .product-cup {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            width: 25%;
+            height: auto;
+            border-radius: 8px;
+            z-index: 20;
+            opacity: 0.9;
+            pointer-events: none; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="pageContainer" class="page-container">
+        <!-- 1. Heading Section -->
+        <div class="heading-section">
+            <h2>TRUSTED BY VETS. LOVED BY PETS.</h2>
+        </div>
+
+        <!-- 2. Video Carousel -->
+        <div class="carousel-wrapper">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Video cards will be populated here by JS -->
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const track = document.getElementById('carouselTrack');
+        const pageContainer = document.getElementById('pageContainer');
+        
+        // Using a publicly available test video URL
+        const VIDEO_URL = "https://www.w3schools.com/html/mov_bbb.mp4"; 
+        
+        const slideData = [
+            { id: 1, text: "Happy Dog" },
+            { id: 2, text: "Golden Retriever" },
+            { id: 3, text: "Mixed Breeds" },
+            { id: 4, text: "Little Puppy" },
+            { id: 5, text: "Playful Pet" },
+            { id: 6, text: "Sleeping Cat" },
+            { id: 7, text: "Best Friends" }
+        ];
+
+        let currentIndex = 0;
+        const SLIDE_INTERVAL = 3500; // 3.5 seconds
+        const CLONE_COUNT = 4; // Number of slides to clone for the seamless loop
+        let slideInterval;
+        let isCarouselAutoSliding = true;
+        let resumeTimer;
+
+        // --- Manual Sliding Variables ---
+        let itemWidth = 0; // Calculated width of a single carousel item
+        const MIN_DRAG_DISTANCE = 50; // Minimum pixels to register a slide
+        let isDragging = false;
+        let startX = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        // --- End Manual Sliding Variables ---
+
+
+        /**
+         * Creates the HTML structure for a single video card.
+         */
+        function createSlideHTML(slide, isClone = false) {
+            const cupUrl = `https://placehold.co/100x150/1a4f32/ffffff?text=Product+Cup`;
+            const videoId = `video-${slide.id}${isClone ? '-clone' : ''}`;
+
+            return `
+                <div class="carousel-item" data-video-id="${videoId}" data-type="${isClone ? 'clone' : 'real'}">
+                    <div class="video-card" data-playing="false">
+                        <div class="video-container">
+                            <video id="${videoId}" class="video-element" loop muted playsinline preload="metadata">
+                                <source src="${VIDEO_URL}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            
+                            <img src="${cupUrl}" class="product-cup" alt="Product cup placeholder">
+                            
+                            <!-- Large Overlay Play Button -->
+                            <div class="overlay control-btn" data-action="play_pause_video" data-target-id="${videoId}">
+                                <div class="play-button-center" data-icon="play">
+                                    <!-- Play Icon -->
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 6V18L18 12L7 6Z" fill="white"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="controls">
+                            <div class="control-btn play-icon-small" data-action="play_pause_video" data-target-id="${videoId}">
+                                <!-- Small Play Icon (Toggles to Pause) -->
+                                <svg data-icon="play" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 6V18L18 12L7 6Z" fill="currentColor"/>
+                                </svg>
+                                <!-- Small Pause Icon (Shown when playing) -->
+                                <svg data-icon="pause" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                    <rect x="6" y="5" width="4" height="14" fill="currentColor"/>
+                                    <rect x="14" y="5" width="4" height="14" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <div class="control-btn volume-icon" data-action="mute_unmute_video" data-target-id="${videoId}">
+                                <!-- Volume On Icon -->
+                                <svg data-icon="volume-on" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 3.23V5.27C16.89 6.15 19 8.83 19 12C19 15.17 16.89 17.85 14 18.73V20.77C18.01 19.86 21 16.32 21 12C21 7.68 18.01 4.14 14 3.23ZM16.5 12C16.5 10.23 15.58 8.71 14 7.97V16.03C15.58 15.29 16.5 13.77 16.5 12ZM3 9V15H7L12 20V4L7 9H3Z" fill="currentColor"/>
+                                </svg>
+                                <!-- Volume Off Icon (Shown when muted) -->
+                                <svg data-icon="volume-off" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                    <path d="M16.5 12C16.5 10.23 15.58 8.71 14 7.97V16.03C15.58 15.29 16.5 13.77 16.5 12ZM3 9V15H7L12 20V4L7 9H3ZM19 12C19 10.02 18.3 8.18 17.13 6.64L18.57 5.2C20.07 7.02 21 9.38 21 12C21 14.62 20.07 16.98 18.57 18.8L17.13 17.36C18.3 15.82 19 13.98 19 12Z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /** Auto-Slide Controls **/
+        
+        function startAutoSlide() {
+            if (!isCarouselAutoSliding) {
+                slideInterval = setInterval(moveTrack, SLIDE_INTERVAL);
+                isCarouselAutoSliding = true;
+            }
+        }
+
+        function pauseAutoSlide() {
+            if (isCarouselAutoSliding) {
+                clearInterval(slideInterval);
+                isCarouselAutoSliding = false;
+            }
+            // Clear any existing video resume timer
+            clearTimeout(resumeTimer);
+        }
+        
+        function setTransform(translate) {
+            track.style.transform = `translateX(${translate}px)`;
+        }
+
+        /** Carousel Movement / Infinite Loop Logic **/
+        
+        function handleInfiniteLoopReset() {
+            const totalRealSlides = slideData.length;
+            
+            // If we have slid past the real slides (into the clones), jump back to the start
+            if (currentIndex >= totalRealSlides) {
+                const jumpIndex = 0;
+                const jumpTranslate = -jumpIndex * itemWidth;
+                
+                // Use a short delay/setTimeout to ensure the smooth slide/snap finishes before the reset
+                setTimeout(() => {
+                    track.style.transition = 'none';
+                    setTransform(jumpTranslate);
+                    currentIndex = jumpIndex;
+
+                    // Re-enable transition for the next smooth slide
+                    requestAnimationFrame(() => {
+                        setTimeout(() => {
+                            track.style.transition = 'transform 0.6s ease-in-out';
+                        }, 50); 
+                    });
+                }, 600); // Wait for the transition duration
+            } else if (currentIndex < 0) {
+                // If user slides too far right (backwards), jump to the position right before the clones
+                const jumpIndex = totalRealSlides - 1;
+                const jumpTranslate = -jumpIndex * itemWidth;
+                setTransform(jumpTranslate);
+                currentIndex = jumpIndex;
+            }
+            // Update prevTranslate after potential reset
+            prevTranslate = -currentIndex * itemWidth;
+        }
+
+
+        function moveTrack() {
+            if (itemWidth === 0) return; // Guard against uninitialized width
+            
+            // 1. Perform the smooth transition to the next slide
+            currentIndex++;
+            let transformValue = -currentIndex * itemWidth;
+            setTransform(transformValue);
+            prevTranslate = transformValue; // Update prevTranslate for tracking
+
+            // 2. Check for the reset condition
+            const totalRealSlides = slideData.length;
+            if (currentIndex >= totalRealSlides) {
+                // Delay the reset until the transition is complete
+                handleInfiniteLoopReset();
+            }
+        }
+
+
+        /** Manual Drag/Swipe Handlers **/
+        
+        function touchStart(event) {
+            // Pause auto-slide and clear video resume timer
+            pauseAutoSlide();
+
+            // Prevent drag if a video is already playing
+            const anyVideoPlaying = Array.from(document.querySelectorAll('video')).some(v => !v.paused);
+            if (anyVideoPlaying) return; 
+
+            isDragging = true;
+            track.classList.add('dragging');
+            
+            // Get the X coordinate from touch or mouse event
+            startX = event.type.includes('touch') ? event.touches[0].clientX : event.clientX;
+            
+            // Disable CSS transition for instant drag movement
+            track.style.transition = 'none';
+        }
+
+        function touchMove(event) {
+            if (!isDragging) return;
+
+            const currentX = event.type.includes('touch') ? event.touches[0].clientX : event.clientX;
+            const deltaX = currentX - startX;
+
+            currentTranslate = prevTranslate + deltaX;
+
+            // Apply drag translate immediately
+            setTransform(currentTranslate);
+            
+            // Prevent default touch scrolling to allow horizontal movement
+            if (event.type.includes('touch')) {
+                // Prevent vertical scrolling when moving horizontally
+                if (Math.abs(deltaX) > 10) {
+                     event.preventDefault();
+                }
+            }
+        }
+        
+        function touchEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            track.classList.remove('dragging');
+            
+            // Re-enable transition for smooth snap/slide
+            track.style.transition = 'transform 0.6s ease-in-out';
+
+            const movedBy = currentTranslate - prevTranslate;
+            const totalSlides = slideData.length;
+
+            // 1. Determine new index based on swipe distance
+            if (Math.abs(movedBy) > MIN_DRAG_DISTANCE) {
+                if (movedBy < 0) { // Swiped left -> move to next slide
+                    currentIndex = currentIndex + 1;
+                } else { // Swiped right -> move to previous slide
+                    currentIndex = currentIndex - 1;
+                }
+            }
+            
+            // 2. Clamp index to handle forward/backward infinite loop logic
+            
+            // If the user drags past the last real item (into the clones)
+            if (currentIndex >= totalSlides) {
+                // If it was a manual drag past the end, we still snap to the last real item
+                currentIndex = totalSlides;
+            } else if (currentIndex < 0) {
+                // If the user drags backward past the start
+                currentIndex = 0; 
+            }
+            
+            // 3. Perform the snap/slide to the nearest valid index
+            const newTranslate = -currentIndex * itemWidth;
+            setTransform(newTranslate);
+            
+            // Update prevTranslate for the next interaction
+            prevTranslate = newTranslate;
+
+            // 4. Handle infinite loop reset after manual interaction (if applicable)
+            handleInfiniteLoopReset();
+
+            // 5. Resume auto-slide
+            startAutoSlide();
+        }
+
+        // Add mouseup/touchend listeners to the window/document to catch drags that go off the track
+        document.addEventListener('mouseup', touchEnd);
+        document.addEventListener('touchend', touchEnd);
+
+
+        /** Video Playback Controls (Unchanged) **/
+        
+        function updatePlayPauseIcons(video, card) {
+            const isPlaying = !video.paused;
+            const smallIcons = card.querySelectorAll('.play-icon-small svg');
+            
+            smallIcons.forEach(icon => {
+                const iconType = icon.getAttribute('data-icon');
+                icon.style.display = (isPlaying && iconType === 'play') || (!isPlaying && iconType === 'pause') ? 'none' : 'block';
+            });
+            
+            card.setAttribute('data-playing', isPlaying);
+        }
+
+        function updateVolumeIcons(video, card) {
+            const isMuted = video.muted;
+            const volumeIcons = card.querySelectorAll('.volume-icon svg');
+            
+            volumeIcons.forEach(icon => {
+                const iconType = icon.getAttribute('data-icon');
+                icon.style.display = (isMuted && iconType === 'volume-on') || (!isMuted && iconType === 'volume-off') ? 'none' : 'block';
+            });
+            if (!isMuted && video.paused) {
+                video.play().catch(e => console.error("Play failed:", e));
+            }
+        }
+
+        function handleVideoControl(event) {
+            const controlBtn = event.target.closest('.control-btn');
+            if (!controlBtn) return;
+
+            const action = controlBtn.getAttribute('data-action');
+            const videoId = controlBtn.getAttribute('data-target-id');
+            const video = document.getElementById(videoId);
+            const card = video.closest('.video-card');
+
+            if (!video) return;
+
+            if (action === 'play_pause_video') {
+                if (video.paused) {
+                    // Pause all other videos first
+                    document.querySelectorAll('video').forEach(v => {
+                        if (v !== video && !v.paused) {
+                            v.pause();
+                            v.closest('.video-card').setAttribute('data-playing', 'false');
+                            updatePlayPauseIcons(v, v.closest('.video-card'));
+                        }
+                    });
+
+                    // Play the target video and pause the carousel
+                    video.play().catch(e => console.error("Play failed:", e));
+                    pauseAutoSlide();
+                } else {
+                    // Pause the target video and set up to resume carousel
+                    video.pause();
+                    // Resume auto-slide after a delay (e.g., 5 seconds) to allow user to click again
+                    clearTimeout(resumeTimer);
+                    resumeTimer = setTimeout(startAutoSlide, 5000); 
+                }
+                updatePlayPauseIcons(video, card);
+
+            } else if (action === 'mute_unmute_video') {
+                video.muted = !video.muted;
+                updateVolumeIcons(video, card);
+            }
+        }
+        
+        pageContainer.addEventListener('click', handleVideoControl);
+
+
+        /** Initialization **/
+        
+        function initializeCarousel() {
+            // 1. Generate real slides and clones
+            let realSlidesHTML = slideData.map(slide => createSlideHTML(slide, false)).join('');
+            let cloneSlidesHTML = slideData.slice(0, CLONE_COUNT).map(slide => createSlideHTML(slide, true)).join('');
+            track.innerHTML = realSlidesHTML + cloneSlidesHTML;
+
+            // 2. Calculate Item Width (Needed for both auto-slide and manual drag)
+            const allItems = track.querySelectorAll('.carousel-item');
+            if (allItems.length === 0) return;
+            // Calculate width: item width + left/right margins (0.5rem * 2)
+            itemWidth = allItems[0].offsetWidth + (parseFloat(getComputedStyle(allItems[0]).marginLeft) * 2);
+
+            // 3. Set up Manual Drag/Swipe Listeners
+            track.addEventListener('mousedown', touchStart);
+            track.addEventListener('touchstart', touchStart);
+            track.addEventListener('mousemove', touchMove);
+            track.addEventListener('touchmove', touchMove);
+            
+            // 4. Start the auto-slide loop
+            startAutoSlide();
+
+            // 5. Pause auto-slide on hover for desktop (better UX)
+            track.addEventListener('mouseenter', pauseAutoSlide);
+            track.addEventListener('mouseleave', () => {
+                // Only resume if no video is actively playing
+                const anyVideoPlaying = Array.from(document.querySelectorAll('video')).some(v => !v.paused);
+                if (!anyVideoPlaying) {
+                    clearTimeout(resumeTimer);
+                    resumeTimer = setTimeout(startAutoSlide, 10); 
+                }
+            });
+            
+            // 6. Set up video listeners
+            document.querySelectorAll('video').forEach(video => {
+                const card = video.closest('.video-card');
+                video.addEventListener('ended', () => {
+                    card.setAttribute('data-playing', 'false');
+                    updatePlayPauseIcons(video, card);
+                    clearTimeout(resumeTimer);
+                    resumeTimer = setTimeout(startAutoSlide, 5000);
+                });
+                updateVolumeIcons(video, card);
+            });
+        }
+
+        // Initialize the carousel once the window and basic layout are ready
+        window.addEventListener('load', initializeCarousel);
+        
+        // Re-initialize or re-calculate dimensions on resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            pauseAutoSlide();
+            resizeTimer = setTimeout(() => {
+                currentIndex = 0;
+                track.innerHTML = '';
+                initializeCarousel();
+            }, 250); 
+        });
+
+    </script>
+</body>
+</html>

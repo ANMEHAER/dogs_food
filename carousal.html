@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Video Carousel</title>
+    <style>
+        /* Global Reset & Font */
+        :root {
+            --card-max-width: 310.4px;
+            --main-bg: #f5f5f5;
+            --controls-bg: rgba(255, 255, 255, 0.85);
+            --control-icon-color: #212121;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--main-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+        }
+
+        /* --- Main Container & Title --- */
+        .title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .carousel-container {
+            max-width: 1920px;
+            width: 90vw; /* Fluid width up to 1920px */
+            margin: 0 auto;
+            overflow: hidden; /* Hide the duplicated cards outside the viewport */
+            position: relative;
+        }
+
+        /* --- Carousel Track --- */
+        .carousel-track {
+            display: flex;
+            cursor: grab;
+            user-select: none;
+            will-change: transform; /* Performance optimization */
+        }
+
+        /* --- Individual Cards --- */
+        .carousel-card {
+            min-width: var(--card-max-width);
+            max-width: var(--card-max-width);
+            flex-shrink: 0;
+            margin: 0 10px; /* Spacing between cards (20px total) */
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            cursor: pointer;
+            height: 480px; /* Fixed height for visual consistency */
+        }
+        
+        /* Responsive Card Width (Adjust for smaller screens) */
+        @media (max-width: 640px) {
+             .carousel-card {
+                min-width: 80vw; /* Take up most of the viewport on mobile */
+                max-width: 80vw;
+                height: auto; /* Allow height to adjust */
+            }
+        }
+
+        /* --- Video Element --- */
+        .carousel-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- Controls Overlay --- */
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: var(--controls-bg);
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            height: 50px;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: var(--control-icon-color);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Ensure controls are clickable even when dragging */
+            touch-action: manipulation; 
+        }
+
+        .control-btn:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .control-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            transition: transform 0.2s;
+        }
+        
+        .control-btn:active svg {
+            transform: scale(0.9);
+        }
+
+        /* Initial state is 'paused' (play button visible) */
+        .play-pause-btn.playing .icon-play,
+        .play-pause-btn:not(.playing) .icon-pause {
+            display: none;
+        }
+
+        /* Initial state is 'unmuted' (volume up icon visible) */
+        .mute-unmute-btn.muted .icon-volume-up,
+        .mute-unmute-btn:not(.muted) .icon-volume-off {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="title">TRUSTED BY VETS. LOVED BY PETS.</h2>
+
+    <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack">
+            <!-- Cards will be populated and duplicated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // --- Configuration ---
+        const NUM_ORIGINAL_CARDS = 7;
+        const CARD_MARGIN = 20; // 10px left + 10px right margin per card
+        // Duplicate 3 cards at each end for a smoother infinite transition
+        const DUPLICATION_COUNT = 3; 
+        
+        // Reliable video sources
+        const VIDEO_SOURCES = [
+            { poster: 'https://placehold.co/310x480/A65A5A/ffffff?text=Video+1+Poster', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
+            { poster: 'https://placehold.co/310x480/738E6A/ffffff?text=Video+2+Poster', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' },
+            { poster: 'https://placehold.co/310x480/709DAB/ffffff?text=Video+3+Poster', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
+            { poster: 'https://placehold.co/310x480/AB8970/ffffff?text=Video+4+Poster', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' },
+            { poster: 'https://placehold.co/310x480/8A70AB/ffffff?text=Video+5+Poster', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4' },
+            { poster: 'https://placehold.co/310x480/70ABA6/ffffff?text=Video+6+Poster', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4' },
+            { poster: 'https://placehold.co/310x480/AB7073/ffffff?text=Video+7+Poster', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndSnow.mp4' },
+        ];
+        
+        // SVG Icons
+        const ICON_PLAY = '<svg class="icon-play" viewBox="0 0 24 24"><path d="M6 3l12 9-12 9z"/></svg>';
+        const ICON_PAUSE = '<svg class="icon-pause" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+        const ICON_VOLUME_UP = '<svg class="icon-volume-up" viewBox="0 0 24 24"><path d="M3 10v4h3l4 4V6l-4 4H3zm13.5 4c0-1.82-1.22-3.35-2.81-3.79l-.7-.18.7-.18c1.59-.44 2.81-1.97 2.81-3.79 0-2.48-1.74-4.5-4-4.95v1.44c1.11.41 2 1.48 2 2.75 0 1.27-.89 2.34-2 2.75v1.44c2.26.45 4 2.47 4 4.95z"/></svg>';
+        const ICON_VOLUME_OFF = '<svg class="icon-volume-off" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.53 1.53c.66-1.34 1.01-2.87 1.01-4.17 0-4.52-3.2-8.2-7.5-9.05v1.44c3.48.83 6 4 6 7.61zM4.2 4.5l1.5 1.5L10 10.3l.5-.5L18.5 2l1.5 1.5L6.5 17.5l-1.5-1.5L.7 13.8l1.5-1.5 2-2zM12 21.05v-1.44c-3.48-.83-6-4-6-7.61 0-.94.2-1.82.54-2.64L8.01 10.3c-.03.2-.05.41-.05.63 0 1.77 1.02 3.29 2.5 4.03v2.21l2.45 2.45c-.41.28-.86.53-1.34.73z"/></svg>';
+
+
+        // --- DOM Elements & State ---
+        const track = document.getElementById('carouselTrack');
+        const container = track ? track.closest('.carousel-container') : null;
+
+        let isDragging = false;
+        let startX;
+        let startTranslate;
+        let currentTranslate = 0;
+        let cardWidth = 0;
+
+        // --- Core Functions ---
+
+        /**
+         * Calculates the actual width of a single card element, including margins.
+         */
+        function calculateCardMetrics() {
+            const firstCard = track.querySelector('.carousel-card');
+            if (!firstCard) return 0;
+            const style = window.getComputedStyle(firstCard);
+            // Get the calculated width and add the horizontal margins (10px left + 10px right)
+            cardWidth = firstCard.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+        }
+
+        /**
+         * Renders the initial set of cards and duplicates them for the infinite loop effect.
+         */
+        function renderCards() {
+            if (!track) return;
+
+            // 1. Create the original 7 cards
+            const originalCards = VIDEO_SOURCES.map((source, index) => createCard(source, index + 1));
+            
+            track.innerHTML = '';
+            
+            // 2. Prepend clones of the last DUPLICATION_COUNT cards (e.g., 7, 6, 5)
+            for (let i = 1; i <= DUPLICATION_COUNT; i++) {
+                const cloneIndex = (NUM_ORIGINAL_CARDS - i + NUM_ORIGINAL_CARDS) % NUM_ORIGINAL_CARDS;
+                const clone = createCard(VIDEO_SOURCES[cloneIndex], cloneIndex + 1, 'clone-end');
+                track.appendChild(clone);
+            }
+            
+            // 3. Append original cards (indices DUPLICATION_COUNT to DUPLICATION_COUNT + NUM_ORIGINAL_CARDS - 1)
+            originalCards.forEach(card => track.appendChild(card));
+
+            // 4. Append clones of the first DUPLICATION_COUNT cards (e.g., 1, 2, 3)
+            for (let i = 0; i < DUPLICATION_COUNT; i++) {
+                const clone = createCard(VIDEO_SOURCES[i], i + 1, 'clone-start');
+                track.appendChild(clone);
+            }
+        }
+
+        /**
+         * Creates a single video card element.
+         */
+        function createCard(source, index, className = '') {
+            const card = document.createElement('div');
+            card.className = `carousel-card ${className}`;
+            card.setAttribute('data-index', index);
+            
+            card.innerHTML = `
+                <video 
+                    poster="${source.poster}" 
+                    src="${source.src}" 
+                    preload="metadata" 
+                    loop 
+                    muted 
+                ></video>
+                <div class="video-controls">
+                    <button class="control-btn play-pause-btn" aria-label="Play video">
+                        ${ICON_PLAY}
+                        ${ICON_PAUSE}
+                    </button>
+                    <button class="control-btn mute-unmute-btn muted" aria-label="Unmute video">
+                        ${ICON_VOLUME_UP}
+                        ${ICON_VOLUME_OFF}
+                    </button>
+                </div>
+            `;
+            
+            const video = card.querySelector('video');
+            const playPauseBtn = card.querySelector('.play-pause-btn');
+            const muteUnmuteBtn = card.querySelector('.mute-unmute-btn');
+
+            video.onerror = () => {
+                console.error(`Video ${index} failed to load. Check source URL or CORS headers: ${source.src}`);
+            };
+
+            playPauseBtn.addEventListener('click', (e) => togglePlayPause(e, video, playPauseBtn));
+            muteUnmuteBtn.addEventListener('click', (e) => toggleMuteUnmute(e, video, muteUnmuteBtn));
+            card.addEventListener('click', (e) => {
+                // Only toggle play/pause if the click wasn't on the video controls, but allow drag to start
+                if (!e.target.closest('.control-btn')) {
+                     togglePlayPause(e, video, playPauseBtn);
+                }
+            });
+            
+            return card;
+        }
+
+        /**
+         * Toggles the play/pause state of a video, ensuring only one video is playing.
+         */
+        function togglePlayPause(e, video, button) {
+            e.stopPropagation(); 
+
+            if (video.paused || video.ended) {
+                // Pause all other videos
+                document.querySelectorAll('.carousel-card video').forEach(v => {
+                    if (v !== video && !v.paused) {
+                        v.pause();
+                        const btn = v.closest('.carousel-card').querySelector('.play-pause-btn');
+                        if (btn) btn.classList.remove('playing');
+                    }
+                });
+
+                video.play().catch(error => {
+                    console.error("Autoplay attempt failed (usually fixed by user interaction):", error);
+                });
+                button.classList.add('playing');
+            } else {
+                video.pause();
+                button.classList.remove('playing');
+            }
+        }
+
+        /**
+         * Toggles the mute/unmute state of a video.
+         */
+        function toggleMuteUnmute(e, video, button) {
+            e.stopPropagation();
+            video.muted = !video.muted;
+            button.classList.toggle('muted', video.muted);
+            button.setAttribute('aria-label', video.muted ? 'Unmute video' : 'Mute video');
+        }
+
+        // --- Carousel Drag/Touch Logic ---
+
+        /**
+         * Sets up the initial position to start centered on the first non-cloned card.
+         */
+        function initializePosition() {
+            calculateCardMetrics();
+            if (!container || cardWidth === 0) return;
+
+            const containerCenter = container.offsetWidth / 2;
+            const cardHalf = cardWidth / 2;
+            
+            // The first original card is at index DUPLICATION_COUNT (e.g., index 3)
+            const firstOriginalCardOffset = DUPLICATION_COUNT * cardWidth; 
+
+            // Calculate the translate needed to bring the first original card's center to the container's center
+            currentTranslate = containerCenter - cardHalf - firstOriginalCardOffset;
+
+            track.style.transform = `translateX(${currentTranslate}px)`;
+            track.style.transition = 'none'; // Ensure no transition on initial load
+            startTranslate = currentTranslate;
+        }
+
+        function dragStart(e) {
+            if (e.type === 'mousedown' && e.button !== 0) return;
+
+            isDragging = true;
+            track.style.cursor = 'grabbing';
+            track.style.transition = 'none'; // Disable transition during drag
+
+            const clientX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            startX = clientX;
+            startTranslate = currentTranslate;
+        }
+
+        function dragMove(e) {
+            if (!isDragging) return;
+            // Crucial for mobile: prevents the browser from interpreting the swipe as a page scroll.
+            e.preventDefault(); 
+
+            const clientX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            const dragDistance = clientX - startX;
+            
+            currentTranslate = startTranslate + dragDistance;
+            track.style.transform = `translateX(${currentTranslate}px)`;
+        }
+
+        /**
+         * Core Logic: Snaps to the nearest card and performs the infinite loop teleport.
+         */
+        function dragEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            track.style.cursor = 'grab';
+            
+            if (cardWidth === 0) return;
+
+            const containerCenter = container.offsetWidth / 2;
+            const cardHalf = cardWidth / 2;
+            
+            // 1. Determine the card that is currently closest to the center line
+            // Calculate the "zero point" (the translate needed for the first element to be exactly centered)
+            const zeroPointTranslate = containerCenter - cardHalf;
+            
+            // Calculate how many cards we've shifted from the first element's centered position
+            const shiftFromZero = zeroPointTranslate - currentTranslate;
+            
+            // Determine the target index to snap to (0 is the first clone, 3 is the first original card)
+            const targetIndex = Math.round(shiftFromZero / cardWidth);
+            
+            // Calculate the final translation position for snapping
+            const targetTranslate = zeroPointTranslate - (targetIndex * cardWidth);
+            
+            currentTranslate = targetTranslate;
+            track.style.transition = 'transform 0.4s ease-out';
+            track.style.transform = `translateX(${currentTranslate}px)`;
+
+            // 2. Infinite Loop Teleport Logic
+            
+            // The index range for the original set of cards is [DUPLICATION_COUNT, DUPLICATION_COUNT + NUM_ORIGINAL_CARDS - 1]
+            const originalStart = DUPLICATION_COUNT; // e.g., index 3
+            const originalEnd = originalStart + NUM_ORIGINAL_CARDS - 1; // e.g., index 9
+
+            let newIndex = -1;
+
+            // Case A: Swiped too far LEFT (into the clones of the start, e.g., past index 9 into index 10, 11, 12)
+            if (targetIndex > originalEnd) {
+                // Calculate equivalent index in the original set
+                newIndex = targetIndex - NUM_ORIGINAL_CARDS; // e.g., if targetIndex 10 (clone of card 1), jump to index 3 (real card 1)
+            } 
+            // Case B: Swiped too far RIGHT (into the clones of the end, e.g., past index 3 into index 2, 1, 0)
+            else if (targetIndex < originalStart) {
+                // Calculate equivalent index in the original set
+                newIndex = targetIndex + NUM_ORIGINAL_CARDS; // e.g., if targetIndex 2 (clone of card 7), jump to index 9 (real card 7)
+            }
+
+            // If a jump is needed (newIndex is valid)
+            if (newIndex !== -1) {
+                const newTranslate = zeroPointTranslate - (newIndex * cardWidth);
+                
+                setTimeout(() => {
+                    // Perform the instant jump after the visual transition finishes
+                    track.style.transition = 'none';
+                    currentTranslate = newTranslate;
+                    track.style.transform = `translateX(${currentTranslate}px)`;
+                    startTranslate = currentTranslate;
+                }, 400); 
+            }
+            // If no jump occurred, update startTranslate for the next drag
+            else {
+                startTranslate = currentTranslate;
+            }
+        }
+
+        // --- Event Listeners Initialization ---
+
+        function setupEventListeners() {
+            if (!track) return;
+            // Mouse Events: Drag interaction for desktop
+            track.addEventListener('mousedown', dragStart);
+            window.addEventListener('mousemove', dragMove);
+            window.addEventListener('mouseup', dragEnd);
+
+            // Touch Events: Swipe interaction for mobile
+            // passive: false is critical to allow e.preventDefault() in dragMove to block page scrolling
+            track.addEventListener('touchstart', (e) => dragStart(e), { passive: false });
+            window.addEventListener('touchmove', (e) => dragMove(e), { passive: false });
+            window.addEventListener('touchend', dragEnd);
+            
+            // Recalculate position on resize (responsive update)
+            window.addEventListener('resize', initializePosition);
+        }
+
+        // --- Initialization on Load ---
+        window.onload = function() {
+            renderCards();
+            initializePosition();
+            setupEventListeners();
+        };
+
+    </script>
+</body>
+</html>
