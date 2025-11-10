@@ -167,6 +167,17 @@ body {
 .navbar-links-desktop .dropdown.open .dropdown-content {
   display: block;
 }
+.dropdown-content {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.dropdown.open .dropdown-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 
 .dropdown-content a {
@@ -185,9 +196,9 @@ body {
   color: #5b8c5a;
 }
 
-.dropdown:hover .dropdown-content {
+/* .dropdown:hover .dropdown-content {
   display: block;
-}
+} */
 
 /* --- Desktop Action Section --- */
 .navbar-actions-desktop {
@@ -466,6 +477,64 @@ body {
   transform: scale(1.12);
   opacity: 0.9;
 }
+
+.take-the-quiz-btn {
+  margin-right: 12px;
+}
+.icon-link {
+  margin-left: 6px;
+}
+/* --- Plus icon on hover for desktop nav links --- */
+.navbar-links-desktop .nav-link::after {
+  content: "";
+  display: inline-block;
+  margin-left: 6px;
+  font-weight: bold;
+  color: #0f4a12;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  transform: translateY(-2px);
+}
+
+/* When dropdown is hovered or open, show + icon */
+.navbar-links-desktop .dropdown:hover .nav-link::after,
+.navbar-links-desktop .dropdown.open .nav-link::after {
+  content: "+";
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional hover color effect */
+.navbar-links-desktop .dropdown:hover .nav-link::after {
+  color: #5b8c5a;
+}
+
+/* --- Search Bar Functionality --- */
+.search-bar-container {
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  vertical-align: middle;
+}
+
+.search-bar-container.active {
+  width: 200px;
+  opacity: 1;
+  margin-right: 6px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  font-size: 14px;
+}
+
 
 
 /* Fix navbar overflow between 1025px and 1234px */
@@ -1103,9 +1172,9 @@ body {
 .duo-sec-rating {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   font-size: 16px;
-  color: #555;
+  color: #1a1a1a;
 }
 
 .duo-sec-rating .duo-sec-stars img {
@@ -1116,7 +1185,7 @@ body {
 
 .duo-sec-rating .duo-sec-reviews {
   font-size: 0.9rem;
-  color: #666;
+  color: #1a1a1a;
 }
 
 /* === Middle Text Block (Paragraphs) === */
@@ -1963,7 +2032,8 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 0px 20px 80px;
+  padding: 0px 20px 180px;
+  /* height: auto; */
   /* border: 1px solid black; */
 }
 
@@ -2008,6 +2078,7 @@ body {
   position: relative;
   width: clamp(120px, 12vw, 183px);
   text-align: center;
+  overflow: visible; /* ensure dropdown can overlap outside */
 }
 
 .scoop-image {
@@ -2060,29 +2131,30 @@ body {
 }
 
 .scoop-dropdown {
+  position: absolute;
+  top: 105%; /* just below the circle */
+  left: 50%;
+  transform: translateX(-50%);
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   padding: 14px;
-  margin-top: 19.46px;
   font-size: clamp(12px, 1vw, 16px);
   color: #1a1a1a;
-  max-width: 180px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 180px;
   opacity: 0;
-  max-height: 0;
-  overflow: hidden;
+  visibility: hidden;
   transition: all 0.3s ease;
-  /* border: 1px solid black; */
   font-weight: 500;
+  z-index: 10; /* sits above images */
 }
 
 .scoop-dropdown.show {
   opacity: 1;
-  max-height: 200px;
-  margin-top: 35px;
+  visibility: visible;
+  transform: translateX(-50%) translateY(8px);
 }
+
 
 /* Responsive breakpoints */
 @media (max-width: 1024px) {
@@ -2293,13 +2365,13 @@ body {
   background: none;
   font-size: 18px;
   cursor: pointer;
-  color: #2d7d46;
+  color: #0F4A12;
+  /* background-color: yellow; */
 }
 
 .video-controls button:hover {
   color: #000;
 }
-
 
 /* Scroll animation */
 @keyframes scroll {
@@ -2310,6 +2382,7 @@ body {
     transform: translateX(-50%);
   }
 }
+
 /* ========== Responsive Breakpoints for Video Section ========== */
 
 /* 1. Large (Desktop/TV) - 1201px to 1920px */
@@ -2367,7 +2440,7 @@ body {
     scroll-snap-type: x mandatory;
   }
   .video-box {
-    min-width: 85%;
+    /* min-width: 85%; */
     scroll-snap-align: center;
   }
   .scroll-video {
@@ -2388,7 +2461,7 @@ body {
     scroll-snap-type: x mandatory;
   }
   .video-box {
-    min-width: 90%;
+    /* min-width: 90%; */
     scroll-snap-align: center;
   }
   .scroll-video {
@@ -2424,7 +2497,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.8);
+  /* background: rgba(255, 255, 255, 0.8); */
   z-index: -1;
   /* border: 1px solid black; */
 }
@@ -3179,6 +3252,9 @@ body {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+      /* margin-left: 40px;
+    margin-right: 40px; */
+
 }
 
 .social-icons a {
@@ -3226,6 +3302,9 @@ body {
   filter: brightness(0) saturate(100%) invert(40%) sepia(80%) saturate(600%)
     hue-rotate(90deg);
   /* adds a subtle green hover tint similar to your theme */
+}
+.footer-join{
+  margin-right: 181px;
 }
 
 /* =========================
@@ -3285,6 +3364,7 @@ body {
   .social-icons {
     margin-top: 10px;
   }
+  
 }
 
 #mobile-view {
@@ -3397,4 +3477,8 @@ body {
   #desktop-view {
     display: none;
   }
+  .footer-join{
+  margin-right: 0px;
+}
+
 }
