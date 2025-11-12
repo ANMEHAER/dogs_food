@@ -208,7 +208,7 @@ body {
 }
 
 .take-the-quiz-btn {
-  background-color: #2f363f;
+  background-color: #1a1a1a;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -825,6 +825,7 @@ body {
   line-height: 125%;
   color: #0F4A12;
   margin-bottom: clamp(1rem, 3vw, 3.313rem);
+  letter-spacing: 2px;
 }
 
 /* === SUBTITLE === */
@@ -1668,6 +1669,7 @@ body {
   }
 
   .duo-sec-bottom li {
+    font-size: 0.8rem;
     display: flex;
     align-items: center;
     gap: 0px;
@@ -2442,6 +2444,13 @@ body {
 @media (max-width: 600px) {
   .scoop-gallery {
     grid-template-columns: repeat(2, 1fr);
+     column-gap: 20px; /* horizontal space */
+    row-gap: 60px;    /* increase vertical space between rows */
+  }
+  .scoop-section {
+    /* padding: ; */
+        padding: 0px 20px 80px;
+
   }
 }
 
@@ -3488,6 +3497,7 @@ body {
   font-size: 16px;
   margin-bottom: 12px;
   font-weight: bold;
+  color: #1a1a1a;
 }
 
 .footer-links ul {
@@ -3501,7 +3511,7 @@ body {
 
 .footer-links ul li a {
   text-decoration: none;
-  color: #333;
+  color: #1a1a1a;
   font-size: 14px;
   transition: color 0.3s ease;
 }
@@ -3520,13 +3530,13 @@ body {
 .footer-join input {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #161829;
   outline: none;
   border-radius: 4px 0 0 4px;
 }
 
 .footer-join button {
-  background: #2d7d46;
+  background: #0F4A12;
   border: none;
   color: #fff;
   padding: 0 15px;
@@ -3541,7 +3551,7 @@ body {
 
 .footer-join p {
   font-size: 12px;
-  color: #555;
+  color: #000000;
   margin-top: 5px;
 }
 
@@ -3646,6 +3656,12 @@ body {
 
 #mobile-view {
   display: none;
+}
+
+.footer-bottom p{
+  color: #000;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 /* Small Mobiles (≤480px) */
