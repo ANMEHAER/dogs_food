@@ -104,7 +104,7 @@ body {
   /* flex-grow: 1; */
   justify-content: center;
   /* border: 1px solid blue; */
-  gap: 16px;
+  gap: 1px;
 }
 
 /* --- List Item (LI) --- */
