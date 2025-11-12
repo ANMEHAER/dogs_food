@@ -38,7 +38,7 @@ body {
 }
 
 .banner-text {
-  color: var(--text-color);
+  color: #1a1a1a;
   font-size: 16px;
   /* Text size for mobile */
   font-weight: 600;
@@ -131,6 +131,7 @@ body {
 
 
 @media (max-width: 545px) {
+
   /* --- List Item (LI) --- */
   .navbar-links-desktop li {
     /* border: 1px solid red; */
@@ -147,27 +148,26 @@ body {
 }
 
 /* --- Desktop Dropdown Specific Styles (on hover) --- */
-.dropdown-content {
-  /* border: 1px solid black; */
+/* .dropdown-content {
   display: none;
   position: absolute;
   background-color: #ffffff;
   min-width: 262px;
-  /* width: 100%; */
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.15);
   z-index: 10;
   left: 0;
   transform: none;
   top: 100%;
-  /* border-radius: 8px; */
   overflow: hidden;
   margin-top: 29px;
   border-bottom: 3px solid #0f4a12;
-}
+} */
+
 /* Dropdown visible when .open is added */
 .navbar-links-desktop .dropdown.open .dropdown-content {
   display: block;
 }
+
 .dropdown-content {
   transition: opacity 0.2s ease, transform 0.2s ease;
   opacity: 0;
@@ -181,8 +181,7 @@ body {
 
 
 
-.dropdown-content a {
-  /* border: 1px solid black; */
+/* .dropdown-content a {
   color: #0f4a12;
   padding: 14px 20px;
   text-decoration: none;
@@ -190,12 +189,12 @@ body {
   white-space: nowrap;
   font-size: 15px;
   transition: background-color 0.2s;
-}
+} */
 
-.dropdown-content a:hover {
+/* .dropdown-content a:hover {
   background-color: #e6f7e6;
   color: #5b8c5a;
-}
+} */
 
 /* .dropdown:hover .dropdown-content {
   display: block;
@@ -459,7 +458,8 @@ body {
   align-items: center;
   justify-content: center;
   transition: transform 0.2s ease, opacity 0.2s ease;
-  -webkit-tap-highlight-color: transparent; /* no mobile highlight */
+  -webkit-tap-highlight-color: transparent;
+  /* no mobile highlight */
 }
 
 .icon-link img {
@@ -482,9 +482,11 @@ body {
 .take-the-quiz-btn {
   margin-right: 12px;
 }
+
 .icon-link {
   margin-left: 6px;
 }
+
 /* --- Plus icon on hover for desktop nav links --- */
 .navbar-links-desktop .nav-link::after {
   content: "";
@@ -552,7 +554,7 @@ body {
 }
 
 /* Dropdown content styling */
-.dropdown-content {
+/* .dropdown-content {
   display: none;
   position: absolute;
   background-color: #fff;
@@ -561,7 +563,7 @@ body {
   z-index: 1;
   padding: 15px;
   border-bottom: 3px solid #2d7d46;
-}
+} */
 
 .dropdown-content a {
   color: #043927;
@@ -581,27 +583,32 @@ body {
   display: block;
 }
 
-
 /* Fix navbar overflow between 1025px and 1234px */
 @media (max-width: 1234px) and (min-width: 1025px) {
   .navbar {
-    padding: 12px 40px; /* reduce side padding */
+    padding: 12px 40px;
+    /* reduce side padding */
   }
 
   .navbar-links-desktop {
-    margin-left: 120px; /* pull links closer to center */
-    gap: 12px; /* slightly reduce space between links */
+    margin-left: 120px;
+    /* pull links closer to center */
+    gap: 12px;
+    /* slightly reduce space between links */
   }
 
   .navbar-links-desktop li {
-    padding: 0 10px; /* reduce inner padding of nav items */
+    padding: 0 10px;
+    /* reduce inner padding of nav items */
   }
 
   .take-the-quiz-btn {
-    padding: 8px 16px; /* make button a bit narrower */
+    padding: 8px 16px;
+    /* make button a bit narrower */
     margin-right: 10px;
   }
 }
+
 /* Fix: prevent dropdown from vanishing when moving mouse down */
 .navbar-links-desktop .dropdown {
   position: relative;
@@ -614,7 +621,8 @@ body {
   left: 0;
   top: 100%;
   width: 100%;
-  height: 30px; /* gap coverage area */
+  height: 30px;
+  /* gap coverage area */
   background: transparent;
   z-index: 5;
 }
@@ -630,6 +638,7 @@ body {
 
 /* --- Media Queries (Responsiveness) --- */
 @media (max-width: 1024px) {
+
   /* Tablet/Low Res Desktop behavior (wrapping) */
   .navbar {
     flex-wrap: wrap;
@@ -703,7 +712,9 @@ body {
 }
 
 .shop-now-special .shop-card img {
-  width: 100%;
+  /* width: 100%; */
+  width: 98px;
+
   height: auto;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -717,14 +728,74 @@ body {
   margin: 0;
   line-height: 1.3;
 }
+/* --- SHOP Dropdown Styling (Clean White Box with Bullets) --- */
+.navbar-links-desktop .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 300px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 25px 30px;
+  border-bottom: 3px solid #0f4a12; /* green underline */
+  z-index: 999;
+  margin-top: 12px;
+}
+
+/* Show dropdown on hover */
+.navbar-links-desktop .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Each link inside dropdown */
+.navbar-links-desktop .dropdown-content a {
+  color: #0f4a12;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-start;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 14px 0;
+  transition: color 0.2s ease;
+}
+
+/* Bullet before each item */
+.navbar-links-desktop .dropdown-content a::before {
+  content: "•";
+  color: #0f4a12;
+  font-weight: 900;
+  margin-right: 12px;
+  font-size: 22px;
+  line-height: 1;
+  margin-top: -2px;
+}
+
+/* Hover effect */
+.navbar-links-desktop .dropdown-content a:hover {
+  color: #2d7d46;
+}
+
+/* Invisible hover bridge to prevent flicker */
+.navbar-links-desktop .dropdown::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 25px;
+  background: transparent;
+}
+
 
 /* Hero Section - Main Container & Background */
 /* === HERO SECTION SCOPED STYLES ONLY === */
 
+/* === HERO SECTION === */
 .hero-section {
   width: 100%;
-  height: 720px;
-  max-height: 90vh;
+  height: clamp(480px, 40vw + 200px, 720px);
   background-color: #f3efe1;
   background-image: url("./images/a54d75dc8a9d8b6d7b2c8118e541c344caed7bf9.png");
   background-size: cover;
@@ -734,50 +805,53 @@ body {
   align-items: center;
   overflow: hidden;
   font-family: "Poppins", sans-serif;
+  padding: clamp(1rem, 3vw, 3rem);
 }
 
+/* === CONTENT CONTAINER === */
 .hero-section .content-container {
-  width: 42%;
-  max-width: 795px;
-  margin-left: 9.5%;
+  width: clamp(280px, 42%, 795px);
+  margin-left: clamp(1rem, 6vw, 9.5%);
   display: flex;
   flex-direction: column;
   /* border: 1px solid black; */
+  /* gap: clamp(1rem, 2vw, 2.5rem); */
 }
 
+/* === TITLE === */
 .hero-section .hero-title {
   font-family: "Luckiest Guy", cursive;
-  font-size: clamp(2.5rem, 5vw + 1rem, 5rem);
-  line-height: 1.25;
-  color: #0f4a12;
-  /* text-transform: uppercase; */
-  margin-bottom: 3.313rem;
-  /* border: 1px solid black; */
+  font-size: clamp(1.8rem, 4vw + 0.5rem, 5rem);
+  line-height: 125%;
+  color: #0F4A12;
+  margin-bottom: clamp(1rem, 3vw, 3.313rem);
 }
 
+/* === SUBTITLE === */
 .hero-section .hero-subtitle {
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
-  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  font-size: clamp(0.9rem, 1vw + 0.5rem, 1.25rem);
   line-height: 150%;
   color: #1a1a1a;
   max-width: 560px;
-  margin-bottom: 3.313rem;
-  /* border: 1px solid black; */
+  margin-bottom: clamp(1rem, 3vw, 3.313rem);
 }
 
+/* === BUTTON GROUP === */
 .hero-section .button-group {
   display: flex;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: clamp(0.5rem, 1vw, 1rem);
   width: fit-content;
-  /* border: 1px solid black; */
 }
 
+/* === BUTTONS === */
 .hero-section .btn {
-  padding: 0.875rem 1.875rem;
+  padding: clamp(0.5rem, 1vw, 0.875rem) clamp(1rem, 2vw, 1.875rem);
   font-family: "Poppins", sans-serif;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 1vw, 1rem);
   text-decoration: none;
   border-radius: 9999px;
   transition: all 0.3s ease;
@@ -787,27 +861,18 @@ body {
 
 .hero-section .btn-light {
   background-color: #faf9f5;
-  color: #000000;
-  font-size: 18px;
-  font-weight: 600;
-  /* border: 2px solid red; */
+  color: #000;
 }
-
-/* .hero-section .btn-dark{
-  background-color: #fff;
-} */
 
 .hero-section .btn-light:hover {
   background-color: #0f4a12;
-  color: #ffffff;
+  color: #fff;
 }
 
 .hero-section .btn-dark {
   background-color: #0f4a12;
   color: #ebf466;
-  font-size: 18px;
   font-weight: 700;
-  /* border: 2px solid #386733; */
 }
 
 .hero-section .btn-dark:hover {
@@ -815,34 +880,172 @@ body {
   transform: translateY(-1px);
 }
 
-/* === RESPONSIVE MEDIA QUERIES === */
-
-@media (max-width: 1200px) {
-  .hero-section {
-    height: 600px;
-  }
-
+/* === MEDIA QUERIES EVERY 50PX === */
+@media (max-width: 1850px) {
   .hero-section .content-container {
-    width: 50%;
-    margin-left: 5%;
+    width: 43%;
+    margin-left: 4%;
   }
 
   .hero-section .hero-title {
-    margin-bottom: 2rem;
+    font-size: 4.8rem;
+  }
+
+  .hero-section .hero-subtitle {
+    font-size: 1.22rem;
   }
 }
 
-@media (max-width: 768px) {
-  .hero-section {
-    height: 500px;
-    background-position: 65% center;
-  }
-
+@media (max-width: 1800px) {
   .hero-section .content-container {
-    width: 65%;
-    margin-left: 2%;
+    width: 40%;
+    margin-left: 2.5%;
+  }
+
+  .hero-section .hero-title {
+    font-size: 4.5rem;
+  }
+
+  .hero-section .hero-subtitle {
+    font-size: 1.2rem;
   }
 }
+
+@media (max-width: 1750px) {
+  .hero-section .content-container {
+    width: 35%;
+    margin-left: 1.5%;
+  }
+
+  .hero-section .hero-title {
+    font-size: 3.8rem;
+  }
+
+  .hero-section .hero-subtitle {
+    font-size: 1.18rem;
+  }
+}
+
+@media (max-width: 1700px) {
+  .hero-section .content-container {
+    width: 30%;
+    margin-left: 0.5%;
+  }
+
+  .hero-section .hero-title {
+    font-size: 3.1rem;
+  }
+
+  .hero-section .hero-subtitle {
+    font-size: 1.16rem;
+  }
+}
+
+@media (max-width: 1650px) {
+  .hero-section .content-container {
+    width: 47%;
+    margin-left: 0;
+  }
+
+  .hero-section .hero-title {
+    font-size: 4rem;
+  }
+
+  .hero-section .hero-subtitle {
+    font-size: 1.14rem;
+  }
+
+  .hero-section {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 1600px) {
+  .hero-section .content-container {
+    width: 48%;
+    margin-left: 0;
+  }
+
+  .hero-section .hero-title {
+    font-size: 3.8rem;
+  }
+
+  .hero-section .hero-subtitle {
+    font-size: 1.12rem;
+  }
+}
+
+@media (max-width: 1550px) {
+  .hero-section .content-container {
+    width: 49%;
+    margin-left: 0%;
+  }
+
+  .hero-section .hero-title {
+    font-size: 3.6rem;
+  }
+
+  .hero-section .hero-subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .hero-section .content-container {
+    width: 60%;
+    margin-left: 0%;
+  }
+
+  .hero-title {
+    margin-bottom: 20px !important;
+  }
+
+  .hero-subtitle {
+    margin-bottom: 20px !important;
+  }
+
+  .hero-section .hero-title {
+    font-size: 3.4rem;
+  }
+
+  .hero-section .hero-subtitle {
+    font-size: 1.08rem;
+  }
+}
+
+
+
+
+/* === RESPONSIVE BREAKPOINTS === */
+@media (max-width: 1024px) {
+  .hero-section .content-container {
+    width: 50%;
+    margin-left: 0%;
+  }
+
+  .hero-section .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-section .hero-subtitle {
+    font-size: 0.8rem;
+  }
+}
+
+@media(max-width:950px) {
+  .hero-section {
+    background-position: 99% center;
+  }
+}
+
+@media(max-width:900px) {
+  .hero-section {
+    /* background-position: 99% center; */
+    object-fit: contain;
+
+  }
+}
+
 
 @media (max-width: 600px) {
   .hero-section {
@@ -965,6 +1168,7 @@ body {
 }
 
 /* Tablet */
+
 @media (max-width: 1024px) {
   .press-item {
     width: 300px;
@@ -1187,7 +1391,7 @@ body {
   margin: 0 auto;
   max-width: 1674px;
   /* background-color: #ffffff; */
-      background-color: #FAF9F5;
+  background-color: #FAF9F5;
   border-radius: 12px;
   overflow: hidden;
   /* border: 1px solid black; */
@@ -1275,8 +1479,7 @@ body {
 }
 
 /* === Bottom Text Block (List + Button) === */
-.duo-sec-bottom {
-}
+.duo-sec-bottom {}
 
 .duo-sec-bottom ul {
   list-style: none;
@@ -1584,8 +1787,8 @@ body {
   max-width: 100%;
   height: auto;
   display: block;
-  
-    background: #faf5f9;
+
+  background: #faf5f9;
 }
 
 .pup-rating img {
@@ -2130,9 +2333,10 @@ body {
 
 .scoop-text p {
   font-size: clamp(14px, 1.2vw, 20px);
-  color: #1a1a1a;
+  color: #000000;
   font-weight: 500;
   line-height: 152%;
+  font-family: 'Manrope';
 }
 
 .scoop-gallery {
@@ -2147,7 +2351,8 @@ body {
   position: relative;
   width: clamp(120px, 12vw, 183px);
   text-align: center;
-  overflow: visible; /* ensure dropdown can overlap outside */
+  overflow: visible;
+  /* ensure dropdown can overlap outside */
 }
 
 .scoop-image {
@@ -2201,7 +2406,8 @@ body {
 
 .scoop-dropdown {
   position: absolute;
-  top: 105%; /* just below the circle */
+  top: 105%;
+  /* just below the circle */
   left: 50%;
   transform: translateX(-50%);
   background: white;
@@ -2215,7 +2421,8 @@ body {
   visibility: hidden;
   transition: all 0.3s ease;
   font-weight: 500;
-  z-index: 10; /* sits above images */
+  z-index: 10;
+  /* sits above images */
 }
 
 .scoop-dropdown.show {
@@ -2339,6 +2546,7 @@ body {
 
 /* 5. Responsiveness for Tablets and Mobile (Stack the cards) */
 @media (max-width: 1150px) {
+
   /* At 1150px, the 3 cards start to feel cramped, so we switch to column layout earlier. */
   .features-wrapper {
     flex-direction: column;
@@ -2390,9 +2598,12 @@ body {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  scrollbar-width: none;        /* Hide scrollbar in Firefox */
-  -ms-overflow-style: none;     /* Hide scrollbar in Edge/IE */
-  scroll-behavior: smooth;      /* Optional: smooth scroll */
+  scrollbar-width: none;
+  /* Hide scrollbar in Firefox */
+  -ms-overflow-style: none;
+  /* Hide scrollbar in Edge/IE */
+  scroll-behavior: smooth;
+  /* Optional: smooth scroll */
 }
 
 /* Hide scrollbar for Chrome, Safari, Opera */
@@ -2447,6 +2658,7 @@ body {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-50%);
   }
@@ -2459,9 +2671,11 @@ body {
   .video-header {
     font-size: 2.5rem;
   }
+
   .video-track {
     gap: 30px;
   }
+
   .scroll-video {
     max-width: 350px;
     max-height: 480px;
@@ -2473,9 +2687,11 @@ body {
   .video-header {
     font-size: 2.2rem;
   }
+
   .video-track {
     gap: 25px;
   }
+
   .scroll-video {
     max-width: 320px;
     max-height: 450px;
@@ -2488,9 +2704,11 @@ body {
     font-size: 2rem;
     margin-bottom: 25px;
   }
+
   .video-track {
     gap: 20px;
   }
+
   .scroll-video {
     max-width: 280px;
     max-height: 400px;
@@ -2503,15 +2721,19 @@ body {
     font-size: 1.6rem;
     margin-bottom: 20px;
   }
+
   .video-track {
     gap: 15px;
-    overflow-x: auto; /* horizontal scroll enable */
+    overflow-x: auto;
+    /* horizontal scroll enable */
     scroll-snap-type: x mandatory;
   }
+
   .video-box {
     /* min-width: 85%; */
     scroll-snap-align: center;
   }
+
   .scroll-video {
     max-width: 240px;
     max-height: 340px;
@@ -2524,19 +2746,23 @@ body {
     font-size: 1.4rem;
     margin-bottom: 15px;
   }
+
   .video-track {
     gap: 12px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
   }
+
   .video-box {
     /* min-width: 90%; */
     scroll-snap-align: center;
   }
+
   .scroll-video {
     max-width: 200px;
     max-height: 300px;
   }
+
   .video-controls button {
     font-size: 16px;
   }
@@ -2881,7 +3107,7 @@ body {
 }
 
 /* Circle around + and - */
-.accordion-header span  {
+.accordion-header span {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3235,6 +3461,7 @@ body {
   padding: 40px 70px;
   font-family: "Poppins", sans-serif;
   color: #222;
+  /* border: 1px solid black; */
 }
 
 .footer-container {
@@ -3242,11 +3469,13 @@ body {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 85px;
   align-items: flex-start;
+  /* border: 1px solid black; */
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .footer-logo img {
   width: 120px;
-  transition: all 0.3s ease;
 }
 
 .footer-logo img:hover {
@@ -3279,11 +3508,13 @@ body {
 
 .footer-links ul li a:hover {
   color: #2d7d46;
+  /* hover green */
 }
 
 .footer-join .subscribe-box {
   display: flex;
   margin-bottom: 10px;
+  max-width: 248px;
 }
 
 .footer-join input {
@@ -3315,16 +3546,15 @@ body {
 }
 
 .footer-bottom {
+  /* border: 1px solid black; */
+  margin: 0 auto;
+  max-width: 1440px;
   border-top: 1px solid #eee;
   margin-top: 30px;
   padding-top: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-      /* margin-left: 40px;
-    margin-right: 40px; */
-
 }
 
 .social-icons a {
@@ -3353,29 +3583,6 @@ body {
   margin-bottom: 8px;
 }
 
-.social-icons img {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.social-icons a {
-  margin-left: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.social-icons a:hover img {
-  transform: scale(1.15);
-  filter: brightness(0) saturate(100%) invert(40%) sepia(80%) saturate(600%)
-    hue-rotate(90deg);
-  /* adds a subtle green hover tint similar to your theme */
-}
-.footer-join{
-  margin-right: 181px;
-}
 
 /* =========================
    RESPONSIVE STYLES
@@ -3434,7 +3641,7 @@ body {
   .social-icons {
     margin-top: 10px;
   }
-  
+
 }
 
 #mobile-view {
@@ -3445,33 +3652,59 @@ body {
 @media (max-width: 480px) {
   .footer {
     padding: 25px 20px;
-    text-align: center;
   }
 
   .footer-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* Keeps content elements (links/join) aligned left */
+    align-items: flex-start;
     gap: 30px;
+  }
+
+  /* --- Logo Centering --- */
+  .footer-logo {
+    width: 100%;
+    /* Ensure the container takes full width to center its content */
+    text-align: center;
+    /* Center block/inline elements within */
+    margin-bottom: 10px;
   }
 
   .footer-logo img {
     width: 100px;
-    margin-bottom: 10px;
+    display: inline-block;
+    /* Allows text-align: center on parent to work */
   }
 
-  .social-icons {
+  /* --- Mobile Social Icons Centering --- */
+  #mobile-view {
+    width: 100%;
+    /* Ensure the container takes full width */
+    margin-bottom: 15px;
+  }
+
+  #mobile-view .social-icons {
     display: flex;
+    /* This centers the flex items (icons) within #mobile-view */
     justify-content: center;
     gap: 15px;
     margin-top: 5px;
-  }
-
-  .footer-links {
     width: 100%;
   }
 
-  .footer-links h4 {
+  /* --- Links and Join remain Left-Aligned (as set previously) --- */
+
+  .footer-links,
+  .footer-join {
+    width: 100%;
+    text-align: left;
+    /* Ensures section text/content is left-aligned */
+  }
+
+  .footer-links h4,
+  .footer-join h4 {
+    text-align: left;
     font-size: 15px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -3483,48 +3716,36 @@ body {
   .quick-sniffs-columns {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 25px;
   }
 
   .quick-sniffs-columns ul {
-    width: 45%;
+    width: auto;
     text-align: left;
+    margin: 0;
   }
 
-  .footer-links ul li a {
-    font-size: 13px;
-  }
-
-  .footer-join {
-    width: 100%;
+  .footer-links ul {
+    text-align: left;
   }
 
   .footer-join .subscribe-box {
     display: flex;
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .footer-join input {
-    flex: 1;
-    padding: 10px;
-    border-radius: 4px 0 0 4px;
-  }
-
-  .footer-join button {
-    background: #2d7d46;
-    color: #fff;
-    border-radius: 0 4px 4px 0;
-    padding: 0 14px;
+    /* Optional: cap the width and center the block */
+    max-width: 300px;
+    margin: 10px auto 0 0;
+    /* Align box left within its container */
   }
 
   .footer-join p {
     font-size: 12px;
     color: #555;
     margin-top: 8px;
+    text-align: left;
   }
 
+  /* --- Footer Bottom (Copyright) --- */
   .footer-bottom {
     margin-top: 25px;
     padding-top: 15px;
@@ -3535,11 +3756,6 @@ body {
     gap: 8px;
   }
 
-  .footer-bottom p {
-    font-size: 12px;
-    color: #555;
-  }
-
   #mobile-view {
     display: block;
   }
@@ -3547,8 +3763,4 @@ body {
   #desktop-view {
     display: none;
   }
-  .footer-join{
-  margin-right: 0px;
-}
-
 }
