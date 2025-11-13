@@ -728,6 +728,7 @@ body {
   margin: 0;
   line-height: 1.3;
 }
+
 /* --- SHOP Dropdown Styling (Clean White Box with Bullets) --- */
 .navbar-links-desktop .dropdown-content {
   display: none;
@@ -738,7 +739,8 @@ body {
   background-color: #ffffff;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   padding: 25px 30px;
-  border-bottom: 3px solid #0f4a12; /* green underline */
+  border-bottom: 3px solid #0f4a12;
+  /* green underline */
   z-index: 999;
   margin-top: 12px;
 }
@@ -825,7 +827,7 @@ body {
   line-height: 125%;
   color: #0F4A12;
   margin-bottom: clamp(1rem, 3vw, 3.313rem);
-  letter-spacing: 2px;
+  /* letter-spacing: 2px; */
 }
 
 /* === SUBTITLE === */
@@ -1100,6 +1102,7 @@ body {
 }
 
 /* press-section-css */
+/* press-section-css */
 .press-section {
   width: 100%;
   background-color: #e8754c;
@@ -1119,6 +1122,8 @@ body {
   display: flex;
   gap: 32px;
   animation: press-slide 35s linear infinite;
+  align-items: center;
+  /* Ensures all items align vertically in center */
 }
 
 /* Pause animation when hovered */
@@ -1133,10 +1138,10 @@ body {
   width: 100%;
   height: 116px;
   border-radius: 12px;
-  /* border: 1px solid rgba(255, 255, 255, 0.4); */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  /* Center both text and image vertically */
   align-items: center;
   padding: 16px;
   color: white;
@@ -1144,17 +1149,25 @@ body {
   box-sizing: border-box;
 }
 
+/* Text styling */
 .press-item p {
   font-size: 14px;
   line-height: 1.4;
   margin: 0 0 8px 0;
+  height: 38px;
+  /* Fix height so all items align evenly */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
+/* Image styling */
 .press-item img {
-  /* border: 1px solid black; */
   max-width: 150px;
   height: auto;
   filter: brightness(0) invert(1);
+  object-fit: contain;
 }
 
 /* Default animation */
@@ -1169,7 +1182,6 @@ body {
 }
 
 /* Tablet */
-
 @media (max-width: 1024px) {
   .press-item {
     width: 300px;
@@ -1178,8 +1190,6 @@ body {
 
   .press-item img {
     max-width: 130px;
-    height: auto;
-    object-fit: contain;
   }
 }
 
@@ -1194,9 +1204,9 @@ body {
 
   .press-track {
     animation: none;
-    /* Will be handled dynamically by JS */
   }
 }
+
 
 /* health section-css  */
 :root {
@@ -1267,7 +1277,7 @@ body {
   line-height: 125%;
   color: var(--betterhealth-heading-color);
   margin: 0;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-family: "Luckiest Guy";
   color: #1a1a1a;
 }
@@ -2430,7 +2440,7 @@ body {
 .scoop-dropdown.show {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(8px);
+  transform: translateX(-50%) translateY(30px);
 }
 
 
@@ -2444,13 +2454,14 @@ body {
 @media (max-width: 600px) {
   .scoop-gallery {
     grid-template-columns: repeat(2, 1fr);
-     column-gap: 20px; /* horizontal space */
-    row-gap: 60px;    /* increase vertical space between rows */
+    column-gap: 20px;
+    /* horizontal space */
+    row-gap: 60px;
+    /* increase vertical space between rows */
   }
-  .scoop-section {
-    /* padding: ; */
-        padding: 0px 20px 80px;
 
+  .scoop-section {
+    padding: 0px 20px 80px;
   }
 }
 
@@ -2581,201 +2592,110 @@ body {
 }
 
 /* video-section-css */
-.video-section {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1920px;
-  padding: 40px 20px;
-  text-align: center;
-  overflow: hidden;
-}
+    /* ===== Video Section CSS ===== */
+    .video-section {
+      margin: 0 auto;
+      width: 100%;
+      max-width: 1920px;
+      padding: 40px 20px;
+      text-align: center;
+      overflow: hidden;
+      /* border: 1px solid black; */
+    }
 
-.video-header {
-  font-family: "Luckiest Guy", cursive;
-  font-size: 2rem;
-  margin-bottom: 30px;
-}
+    .video-header {
+      font-family: "Luckiest Guy", cursive;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
 
-.video-slider {
-  width: 100%;
-  max-width: 1920px;
-  overflow: hidden;
-  position: relative;
-}
+    .multiple-items {
+      width: 100%;
+    }
 
-.video-track {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  /* Hide scrollbar in Firefox */
-  -ms-overflow-style: none;
-  /* Hide scrollbar in Edge/IE */
-  scroll-behavior: smooth;
-  /* Optional: smooth scroll */
-}
+    .video-box {
+      display: flex !important;
+      flex-direction: column;
+      align-items: center;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      /* max-width: 310.4px; */
+      height: 484px;
+      /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+      margin: 10px;
+      /* border: 1px solid black; */
+    }
 
-/* Hide scrollbar for Chrome, Safari, Opera */
-.video-track::-webkit-scrollbar {
-  display: none;
-}
+    .scroll-video {
+      width: 100%;
+      max-width: 310px;
+      height: 100%;
+      max-height: 433px;
+      background: #000;
+      object-fit: cover;
+      display: block;
+    }
 
-.video-box {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
+    .video-controls {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 15px;
+      background: #f9f9f9;
+    }
 
-.scroll-video {
-  width: 100%;
-  max-width: 310px;
-  height: 100%;
-  max-height: 433px;
-  background: #000;
-  object-fit: cover;
-  display: block;
-}
+    .video-controls button {
+      border: none;
+      background: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: #0F4A12;
+    }
 
-.video-controls {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 15px;
-  background: #f9f9f9;
-}
+    .video-controls button:hover {
+      color: #000;
+    }
 
-.video-controls button {
-  border: none;
-  background: none;
-  font-size: 18px;
-  cursor: pointer;
-  color: #0F4A12;
-  /* background-color: yellow; */
-}
+    /* Hide Slick arrows */
+    .slick-prev,
+    .slick-next {
+      display: none !important;
+    }
 
-.video-controls button:hover {
-  color: #000;
-}
+    /* Optional: tweak dots */
+    .slick-dots li button:before {
+      color: #0F4A12;
+    }
 
-/* Scroll animation */
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
+    .slick-dots li.slick-active button:before {
+      color: #000;
+    }
 
-  to {
-    transform: translateX(-50%);
-  }
-}
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+      .scroll-video {
+        /* max-width: 250px; */
+      }
+    }
 
-/* ========== Responsive Breakpoints for Video Section ========== */
+    @media (max-width: 768px) {
+      .scroll-video {
+        /* max-width: 200px; */
+        /* max-width: 169px;
+        height: 264px; */
+      }
+    }
 
-/* 1. Large (Desktop/TV) - 1201px to 1920px */
-@media (min-width: 1201px) and (max-width: 1920px) {
-  .video-header {
-    font-size: 2.5rem;
-  }
-
-  .video-track {
-    gap: 30px;
-  }
-
-  .scroll-video {
-    max-width: 350px;
-    max-height: 480px;
-  }
-}
-
-/* 2. Large (Desktop) - 1025px to 1200px */
-@media (min-width: 1025px) and (max-width: 1200px) {
-  .video-header {
-    font-size: 2.2rem;
-  }
-
-  .video-track {
-    gap: 25px;
-  }
-
-  .scroll-video {
-    max-width: 320px;
-    max-height: 450px;
-  }
-}
-
-/* 3. Medium (Tablet) - 768px to 1024px */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .video-header {
-    font-size: 2rem;
-    margin-bottom: 25px;
-  }
-
-  .video-track {
-    gap: 20px;
-  }
-
-  .scroll-video {
-    max-width: 280px;
-    max-height: 400px;
-  }
-}
-
-/* 4. Small (Mobile Landscape) - 481px to 767px */
-@media (min-width: 481px) and (max-width: 767px) {
-  .video-header {
-    font-size: 1.6rem;
-    margin-bottom: 20px;
-  }
-
-  .video-track {
-    gap: 15px;
-    overflow-x: auto;
-    /* horizontal scroll enable */
-    scroll-snap-type: x mandatory;
-  }
-
-  .video-box {
-    /* min-width: 85%; */
-    scroll-snap-align: center;
-  }
-
-  .scroll-video {
-    max-width: 240px;
-    max-height: 340px;
-  }
-}
-
-/* 5. Extra Small (Mobile Portrait) - 320px to 480px */
-@media (min-width: 320px) and (max-width: 480px) {
-  .video-header {
-    font-size: 1.4rem;
-    margin-bottom: 15px;
-  }
-
-  .video-track {
-    gap: 12px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-  }
-
-  .video-box {
-    /* min-width: 90%; */
-    scroll-snap-align: center;
-  }
-
-  .scroll-video {
-    max-width: 200px;
-    max-height: 300px;
-  }
-
-  .video-controls button {
-    font-size: 16px;
-  }
-}
+    @media (max-width: 480px) {
+      /* .scroll-video {
+        max-width: 160px;
+      } */
+       .video-box{
+        /* max-width: 169px; */
+        height: 400px;
+       }
+    }
 
 /* subscribe-section-css */
 :root {
@@ -3658,7 +3578,7 @@ body {
   display: none;
 }
 
-.footer-bottom p{
+.footer-bottom p {
   color: #000;
   font-size: 16px;
   font-weight: 500;

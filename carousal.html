@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Section Carousel</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+
+  <!-- Slick Carousel CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+
+  <style>
+    /* review-section-css */
+    .reviews-section {
+      background-color: #faf9f5;
+      padding: 40px 20px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .review-container {
+      margin: 0 auto;
+      max-width: 1920px;
+    }
+
+    .reviews-heading {
+      font-family: "Luckiest Guy", cursive;
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .multiple-items {
+      margin: 0 auto;
+    }
+
+    .review-card {
+      width: 350px;
+      height: 241px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: left;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: space-between;
+      margin: 0 10px;
+    }
+
+    .review-card .stars {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 8px;
+    }
+
+    .review-card .star {
+      color: #2d7d46;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .review-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .review-text {
+      font-size: 16px;
+      color: #111;
+      flex-grow: 1;
+      line-height: 1.4;
+    }
+
+    .review-author {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (min-width: 1201px) and (max-width: 1920px) {
+      .reviews-heading {
+        font-size: 2.5rem;
+      }
+      .review-card {
+        width: 360px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .review-card {
+        width: 320px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .review-card {
+        width: 280px;
+      }
+      .reviews-heading {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .review-card {
+        width: 240px;
+        padding: 15px;
+      }
+      .review-text {
+        font-size: 14px;
+      }
+      .review-author {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- review-section-html -->
+  <section class="reviews-section">
+    <div class="review-container">
+      <h2 class="reviews-heading">
+        LOVED BY PET PARENTS, <br />
+        TRUSTED BY OVER 4 MILLION FURRY TAILS
+      </h2>
+
+      <div class="reviews-wrapper multiple-items">
+        <!-- Card 1 -->
+        <div class="review-card">
+          <div class="stars">
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 5.svg"></span>
+          </div>
+          <div class="review-title">My dog is like a puppy again!</div>
+          <div class="review-text">
+            After just a few weeks of using Everyday One, my 8-year-old
+            labrador is running around like he’s 2 again! His coat is shinier,
+            and he seems happier overall.
+          </div>
+          <div class="review-author">- Laura, Max’s Owner</div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="review-card">
+          <div class="stars">
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 5.svg"></span>
+          </div>
+          <div class="review-title">So much more energy!</div>
+          <div class="review-text">
+            My pup used to nap all day, but now she has the energy to play
+            fetch and run around. Love this product!
+          </div>
+          <div class="review-author">- David, Bella’s Owner</div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="review-card">
+          <div class="stars">
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 5.svg"></span>
+          </div>
+          <div class="review-title">Amazing transformation!</div>
+          <div class="review-text">
+            Everyday One really made a difference in my dog’s mood and health.
+            Highly recommended to all pet parents.
+          </div>
+          <div class="review-author">- Sarah, Rocky’s Owner</div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="review-card">
+          <div class="stars">
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 5.svg"></span>
+          </div>
+          <div class="review-title">Happier & healthier</div>
+          <div class="review-text">
+            My dog loves it and I can see visible changes in her energy
+            levels. She’s definitely happier and healthier!
+          </div>
+          <div class="review-author">- Mike, Daisy’s Owner</div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="review-card">
+          <div class="stars">
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 1 (2).svg"></span>
+            <span class="star"><img src="./images/Star 5.svg"></span>
+          </div>
+          <div class="review-title">Shiny coat & more active</div>
+          <div class="review-text">
+            Ever since I started giving this, his coat looks amazing and he’s
+            more active. Couldn’t be happier!
+          </div>
+          <div class="review-author">- Emma, Charlie’s Owner</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- jQuery + Slick JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('.multiple-items').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        arrows: false,
+        dots: false,
+        autoplay: false,
+        swipeToSlide: true,
+        touchMove: true,
+        pauseOnHover: true,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 2
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 1
+            }
+          }
+        ]
+      });
+    });
+  </script>
+</body>
+</html>

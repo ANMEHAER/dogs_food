@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Section Slick Carousel</title>
+
+  <!-- Slick CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+  <style>
+    /* ===== Video Section CSS ===== */
+    .video-section {
+      margin: 0 auto;
+      width: 100%;
+      max-width: 1920px;
+      padding: 40px 20px;
+      text-align: center;
+      overflow: hidden;
+      /* border: 1px solid black; */
+    }
+
+    .video-header {
+      font-family: "Luckiest Guy", cursive;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .multiple-items {
+      width: 100%;
+    }
+
+    .video-box {
+      display: flex !important;
+      flex-direction: column;
+      align-items: center;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      /* max-width: 310.4px; */
+      height: 484px;
+      /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+      margin: 10px;
+      /* border: 1px solid black; */
+    }
+
+    .scroll-video {
+      width: 100%;
+      max-width: 310px;
+      height: 100%;
+      max-height: 433px;
+      background: #000;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-controls {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 15px;
+      background: #f9f9f9;
+    }
+
+    .video-controls button {
+      border: none;
+      background: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: #0F4A12;
+    }
+
+    .video-controls button:hover {
+      color: #000;
+    }
+
+    /* Hide Slick arrows */
+    .slick-prev,
+    .slick-next {
+      display: none !important;
+    }
+
+    /* Optional: tweak dots */
+    .slick-dots li button:before {
+      color: #0F4A12;
+    }
+
+    .slick-dots li.slick-active button:before {
+      color: #000;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+      .scroll-video {
+        /* max-width: 250px; */
+      }
+    }
+
+    @media (max-width: 768px) {
+      .scroll-video {
+        /* max-width: 200px; */
+        /* max-width: 169px;
+        height: 264px; */
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* .scroll-video {
+        max-width: 160px;
+      } */
+       .video-box{
+        /* max-width: 169px; */
+        height: 400px;
+       }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== Video Section HTML ===== -->
+  <section class="video-section">
+    <h2 class="video-header">TRUSTED BY VETS. LOVED BY PETS.</h2>
+
+    <div class="multiple-items">
+      <!-- Video 1 -->
+      <div class="video-box">
+        <video class="scroll-video" loop>
+          <source src="./images/videos1.mp4" type="video/mp4" />
+        </video>
+        <div class="video-controls">
+          <button class="play-btn">▶</button>
+          <button class="mute-btn"><img src="./images/Vector (25).svg"></button>
+        </div>
+      </div>
+
+      <!-- Video 2 -->
+      <div class="video-box">
+        <video class="scroll-video" loop>
+          <source src="./images/video2.mp4" type="video/mp4" />
+        </video>
+        <div class="video-controls">
+          <button class="play-btn">▶</button>
+          <button class="mute-btn"><img src="./images/Vector (25).svg"></button>
+        </div>
+      </div>
+
+      <!-- Video 3 -->
+      <div class="video-box">
+        <video class="scroll-video" loop>
+          <source src="./images/video3.mp4" type="video/mp4" />
+        </video>
+        <div class="video-controls">
+          <button class="play-btn">▶</button>
+          <button class="mute-btn"><img src="./images/Vector (25).svg"></button>
+        </div>
+      </div>
+
+      <!-- Video 4 -->
+      <div class="video-box">
+        <video class="scroll-video" loop>
+          <source src="./images/video4.mp4" type="video/mp4" />
+        </video>
+        <div class="video-controls">
+          <button class="play-btn">▶</button>
+          <button class="mute-btn"><img src="./images/Vector (25).svg"></button>
+        </div>
+      </div>
+
+      <!-- Video 5 -->
+      <div class="video-box">
+        <video class="scroll-video" loop>
+          <source src="./images/video5.mp4" type="video/mp4" />
+        </video>
+        <div class="video-controls">
+          <button class="play-btn">▶</button>
+          <button class="mute-btn"><img src="./images/Vector (25).svg"></button>
+        </div>
+      </div>
+
+      <div class="video-box">
+        <video class="scroll-video" loop>
+          <source src="./images/video6.mp4" type="video/mp4" />
+        </video>
+        <div class="video-controls">
+          <button class="play-btn">▶</button>
+          <button class="mute-btn"><img src="./images/Vector (25).svg"></button>
+        </div>
+      </div>
+
+      <!-- Video 2 -->
+      <div class="video-box">
+        <video class="scroll-video" loop>
+          <source src="./images/video7.mp4" type="video/mp4" />
+        </video>
+        <div class="video-controls">
+          <button class="play-btn">▶</button>
+          <button class="mute-btn"><img src="./images/Vector (25).svg"></button>
+        </div>
+      </div>
+
+      <!-- Video 3 -->
+      <div class="video-box">
+        <video class="scroll-video" loop>
+          <source src="./images/video3.mp4" type="video/mp4" />
+        </video>
+        <div class="video-controls">
+          <button class="play-btn">▶</button>
+          <button class="mute-btn"><img src="./images/Vector (25).svg"></button>
+        </div>
+      </div>
+
+      <!-- Video 4 -->
+      <div class="video-box">
+        <video class="scroll-video" loop>
+          <source src="./images/video4.mp4" type="video/mp4" />
+        </video>
+        <div class="video-controls">
+          <button class="play-btn">▶</button>
+          <button class="mute-btn"><img src="./images/Vector (25).svg"></button>
+        </div>
+      </div>
+
+      <!-- Video 5 -->
+      <div class="video-box">
+        <video class="scroll-video" loop>
+          <source src="./images/video5.mp4" type="video/mp4" />
+        </video>
+        <div class="video-controls">
+          <button class="play-btn">▶</button>
+          <button class="mute-btn"><img src="./images/Vector (25).svg"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- jQuery + Slick JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  <script>
+    // Initialize Slick Carousel
+    $(document).ready(function(){
+      $('.multiple-items').slick({
+        infinite: true,
+        slidesToShow: 6,
+        slidesToScroll: 2,
+        arrows: false,  // no > < icons
+        dots: false,    // disable dots if you want pure manual scroll
+        autoplay: false,
+        swipe: true,
+        // pauseOnHover: true,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              
+            }
+          }
+        ]
+      });
+    });
+
+    // ===== Video Controls =====
+    document.addEventListener("DOMContentLoaded", () => {
+      const playButtons = document.querySelectorAll(".play-btn");
+      const muteButtons = document.querySelectorAll(".mute-btn");
+      const videos = document.querySelectorAll(".scroll-video");
+
+      playButtons.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+          const video = videos[index];
+          if (video.paused) {
+            videos.forEach((v, i) => {
+              if (i !== index) {
+                v.pause();
+                playButtons[i].textContent = "▶";
+              }
+            });
+            video.play();
+            btn.textContent = "⏸";
+          } else {
+            video.pause();
+            btn.textContent = "▶";
+          }
+        });
+      });
+
+      muteButtons.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+          const video = videos[index];
+          video.muted = !video.muted;
+          btn.textContent = video.muted ? "🔇" : "🔊";
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -122,41 +122,68 @@ function setupPuploveCarousel() {
 
 // video-section
 
-document.addEventListener("DOMContentLoaded", () => {
-  const playButtons = document.querySelectorAll(".play-btn");
-  const muteButtons = document.querySelectorAll(".mute-btn");
-  const videos = document.querySelectorAll(".scroll-video");
+ $(document).ready(function(){
+      $('.multiple-items').slick({
+        infinite: true,
+        slidesToShow: 6,
+        slidesToScroll: 2,
+        arrows: false,  // no > < icons
+        dots: false,    // disable dots if you want pure manual scroll
+        autoplay: false,
+        swipe: true,
+        // pauseOnHover: true,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              
+            }
+          }
+        ]
+      });
+    });
 
-  playButtons.forEach((btn, index) => {
-    btn.addEventListener("click", () => {
-      const video = videos[index];
+    // ===== Video Controls =====
+    document.addEventListener("DOMContentLoaded", () => {
+      const playButtons = document.querySelectorAll(".play-btn");
+      const muteButtons = document.querySelectorAll(".mute-btn");
+      const videos = document.querySelectorAll(".scroll-video");
 
-      if (video.paused) {
-        // Pause all other videos
-        videos.forEach((v, i) => {
-          if (i !== index) {
-            v.pause();
-            playButtons[i].textContent = "▶";
+      playButtons.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+          const video = videos[index];
+          if (video.paused) {
+            videos.forEach((v, i) => {
+              if (i !== index) {
+                v.pause();
+                playButtons[i].textContent = "▶";
+              }
+            });
+            video.play();
+            btn.textContent = "⏸";
+          } else {
+            video.pause();
+            btn.textContent = "▶";
           }
         });
-        video.play();
-        btn.textContent = "⏸";
-      } else {
-        video.pause();
-        btn.textContent = "▶";
-      }
-    });
-  });
+      });
 
-  muteButtons.forEach((btn, index) => {
-    btn.addEventListener("click", () => {
-      const video = videos[index];
-      video.muted = !video.muted;
-      btn.textContent = video.muted ? "🔇" : "🔊";
+      muteButtons.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+          const video = videos[index];
+          video.muted = !video.muted;
+          btn.textContent = video.muted ? "🔇" : "🔊";
+        });
+      });
     });
-  });
-});
-
 //pup section-js
 function setupPupCarousel() {
   const wrapper = document.getElementById("pup-wrapper-id");
